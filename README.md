@@ -1,46 +1,37 @@
-# Astro Starter Kit: Basics
+# Zeltri
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+¡Bienvenido a **Zeltri**, el corazón del ecosistema open source de CROBF! Aquí encontrarás un espacio dedicado a la innovación, el aprendizaje y la colaboración en el mundo del desarrollo.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## ¿Qué es Zeltri? 🤔
 
-## 🚀 Project Structure
+Zeltri es un **hub de conocimiento y código abierto**. Imagina un lugar donde las ideas fluyen libremente, donde los desarrolladores comparten herramientas útiles y donde la comunidad crece.
 
-Inside of your Astro project, you'll see the following folders and files:
+Nuestro proyecto reúne todo en una sola plataforma amigable:
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+- 🌍 Una landing page que te da la bienvenida al mundo CROBF
+- 📚 Documentación clara y accesible para todos
+- 🧩 Proyectos open source que inspiran y ayudan
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Nuestra Filosofía 💡
 
-## 🧞 Commands
+Creemos en el poder del open source real, sin complicaciones. Zeltri se basa en principios simples pero poderosos:
 
-All commands are run from the root of the project, from a terminal:
+- **Open source de verdad**: Código libre, transparente y accesible para todos
+- **Sin fines de lucro**: Enfocados en el valor, no en el beneficio
+- **Documentación clara**: Porque el conocimiento debe ser fácil de entender
+- **Código reutilizable**: Herramientas que sirven una y otra vez
+- **Diseño simple y funcional**: Belleza en la simplicidad
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+> Zeltri existe para crear herramientas útiles, abiertas y bien hechas para desarrolladores como tú.
 
-## 👀 Want to learn more?
+## Nuestra Visión ✨
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Zeltri no aspira a ser una marca ruidosa. Queremos ser un **ecosistema útil** que facilite la vida de los desarrolladores.
+
+No buscamos el hype pasajero. Buscamos **valor real** que perdure.
+
+No queremos ruido. Queremos **claridad** en todo lo que hacemos.
+
+---
+
+Construido con ❤️ por CROBF para la comunidad de desarrolladores.
