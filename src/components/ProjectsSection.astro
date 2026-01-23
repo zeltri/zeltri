@@ -1,0 +1,12 @@
+---
+// ProjectsSection.astro - Sección de listado de proyectos
+import ProjectsList from "./ProjectsList";
+---
+
+<section class="w-full px-4 py-20 flex items-center justify-center">
+  <div class="max-w-6xl w-full">
+    <h2 class="text-4xl font-bold mb-12 text-text-primary">Proyectos</h2>
+
+    <ProjectsList client:load initialCount={3} incrementCount={6} />
+  </div>
+</section>

@@ -1,23 +1,41 @@
+---
+import "../styles/global.css";
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Zeltri - Ecosistema Open Source de CROBF</title>
+    <meta
+      name="description"
+      content="Zeltri es el ecosistema open source de CROBF. Descubre, contribuye y construye juntos."
+    />
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-surface-base text-text-primary antialiased">
+    <slot />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+  }
 </style>
