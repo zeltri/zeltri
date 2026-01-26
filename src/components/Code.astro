@@ -1,0 +1,25 @@
+---
+interface Props {
+  code: string;
+  lang?: string;
+}
+
+const { code, lang = "plaintext" } = Astro.props;
+---
+
+<div class="bg-surface-sunken rounded-lg border border-border-default my-6">
+  <div
+    class="flex items-center justify-between px-4 py-2 border-b border-border-default"
+  >
+    <span class="text-xs text-text-tertiary uppercase">{lang}</span>
+    <button
+      class="text-xs text-text-secondary hover:text-text-primary transition-colors"
+      onclick="this.parentElement.nextElementSibling.select(); document.execCommand('copy'); this.textContent = 'Copiado!'; setTimeout(() => this.textContent = 'Copiar', 2000)"
+    >
+      Copiar
+    </button>
+  </div>
+  <pre
+    class="p-4 text-sm overflow-x-auto"
+  ><textarea readonly class="bg-transparent w-full h-full resize-none outline-none text-text-primary font-mono">{code}</textarea></pre>
+</div>

@@ -1,0 +1,48 @@
+---
+interface Props {
+  icon?: string;
+  highlight?: boolean;
+}
+
+const { icon = "📦", highlight = false } = Astro.props;
+---
+
+<style>
+  .card {
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin: var(--space-md) 0;
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    border-color: var(--color-border-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1);
+  }
+
+  .card.highlight {
+    border: 2px solid var(--color-primary-500);
+    background: linear-gradient(
+      135deg,
+      rgba(245, 158, 11, 0.05) 0%,
+      transparent 100%
+    );
+  }
+
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .card :global(h3) {
+    margin-top: 0;
+  }
+</style>
+
+<div class="card" class:list={{ highlight }}>
+  {icon && <div class="card-icon">{icon}</div>}
+  <slot />
+</div>

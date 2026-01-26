@@ -1,0 +1,291 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Troubleshooting - Bunny-JS">
+  <style>
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      background: #0f0f0f;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #fafafa;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #262626;
+      padding-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      color: #f59e0b;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-top: 1px solid #262626;
+      padding-top: 1rem;
+    }
+
+    p {
+      color: #a3a3a3;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    code {
+      background: #2a2a2a;
+      color: #fbbf24;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.2rem;
+      font-family: "Monaco", monospace;
+      font-size: 0.9rem;
+    }
+
+    pre {
+      background: #1a1a1a;
+      border: 1px solid #262626;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    pre code {
+      background: none;
+      color: #fbbf24;
+      padding: 0;
+    }
+
+    .problem {
+      background: #2a1a1a;
+      border-left: 3px solid #ef4444;
+      padding: 1.5rem;
+      margin: 1.5rem 0 0.75rem 0;
+      border-radius: 0.25rem;
+    }
+
+    .solution {
+      background: #1a2a1a;
+      border-left: 3px solid #22c55e;
+      padding: 1.5rem;
+      margin: 0 0 1rem 0;
+      border-radius: 0.25rem;
+    }
+
+    .faq-item {
+      background: #1a1a1a;
+      border-left: 3px solid #f59e0b;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      border-radius: 0.25rem;
+    }
+
+    .faq-item strong {
+      color: #f59e0b;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #262626;
+    }
+
+    a {
+      color: #f59e0b;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    li {
+      color: #a3a3a3;
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+    }
+  </style>
+
+  <div class="page">
+    <h1>🔧 Troubleshooting y FAQ</h1>
+    <p>Soluciones a problemas comunes y respuestas a preguntas frecuentes.</p>
+
+    <h2>Errores Comunes</h2>
+
+    <div class="problem">
+      <strong style="color: #ef4444;"
+        >❌ "Cannot read property 'button' of undefined"</strong
+      >
+    </div>
+    <div class="solution">
+      <strong style="color: #22c55e;">✓ Solución:</strong> Verifica que importas BunnyJS
+      correctamente.
+      <pre><code is:raw>// ✗ Incorrecto
+import { button } from 'bunny-js';
+
+// ✓ Correcto
+import BunnyJS from 'bunny-js';
+BunnyJS.button();</code></pre>
+    </div>
+
+    <div class="problem">
+      <strong style="color: #ef4444;">❌ Los estilos no se aplican</strong>
+    </div>
+    <div class="solution">
+      <strong style="color: #22c55e;">✓ Solución:</strong> Usa formatos de color válidos.
+      <pre><code>// ✗ Incorrecto
+.bg("blue")
+
+// ✓ Correcto
+.bg("#3b82f6")
+.bg("rgb(59, 130, 246)")
+.bg("dodgerblue")</code></pre>
+    </div>
+
+    <div class="problem">
+      <strong style="color: #ef4444;">❌ El evento no se dispara</strong>
+    </div>
+    <div class="solution">
+      <strong style="color: #22c55e;">✓ Solución:</strong> Asegúrate de insertar el
+      elemento y usa arrow functions.
+      <pre><code>// ✗ Incorrecto
+BunnyJS.button().on("click", function() {
+  // this puede ser inesperado
+});
+
+// ✓ Correcto
+BunnyJS.button()
+  .on("click", (e) => console.log("ok"))
+  .insertIn("#app"); // ¡Importante!</code></pre>
+    </div>
+
+    <div class="problem">
+      <strong style="color: #ef4444;"
+        >❌ "Element not found" con insertIn()</strong
+      >
+    </div>
+    <div class="solution">
+      <strong style="color: #22c55e;">✓ Solución:</strong> Verifica que el selector
+      existe en el DOM.
+      <pre><code is:raw>// ✗ Ambiguo
+.insertIn("div")
+
+// ✓ Específico
+.insertIn("#app")
+.insertIn(".container")
+.insertIn("main > .content")
+
+// ✓ Verificar
+if (document.querySelector("#app")) {
+  BunnyJS.button().insertIn("#app");
+}</code></pre>
+    </div>
+
+    <h2>Preguntas Frecuentes (FAQ)</h2>
+
+    <div class="faq-item">
+      <strong>¿Puedo usar Bunny-JS con React/Vue?</strong>
+      <p>
+        No es recomendado. Los frameworks manejan su propio DOM. Usa Bunny-JS
+        con vanilla JS o Astro.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <strong>¿Qué navegadores soporta?</strong>
+      <p>
+        Todos los navegadores modernos (IE11 no). Requiere soporte para Proxy
+        (ES2015+).
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <strong>¿Cuál es el tamaño del bundle?</strong>
+      <p>
+        Aproximadamente 2kb minificado + gzipeado. Sin dependencias externas.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <strong>¿Funciona en Node.js / SSR?</strong>
+      <p>No. Bunny-JS requiere el DOM del navegador. Solo client-side.</p>
+    </div>
+
+    <div class="faq-item">
+      <strong>¿Cómo modifico elementos existentes?</strong>
+      <p>
+        Usa <code>BunnyJS.select()</code> o <code>BunnyJS.selectAll()</code> para
+        seleccionar elementos del DOM.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <strong>¿Puedo mezclar Bunny-JS con vanilla JS?</strong>
+      <p>
+        Sí. Los elementos retornados son HTMLElements nativos, así que puedes
+        usar los métodos nativos también.
+      </p>
+    </div>
+
+    <h2>Debugging</h2>
+
+    <p>Si algo no funciona, verifica esto:</p>
+
+    <ul>
+      <li>¿Estás importando <code>BunnyJS</code> correctamente?</li>
+      <li>¿El elemento está insertado al DOM con <code>.insertIn()</code>?</li>
+      <li>¿Los selectores en <code>.insertIn()</code> existen?</li>
+      <li>¿Los colores están en formato válido (hex/rgb)?</li>
+      <li>¿Los eventos usan arrow functions?</li>
+      <li>¿No estás encadenando mal (cada método retorna el elemento)?</li>
+      <li>¿Hay conflictos con otro código JavaScript?</li>
+      <li>¿Abriste la consola del navegador? (F12)</li>
+    </ul>
+
+    <h2>Performance</h2>
+
+    <p>Para mejor performance con muchos elementos:</p>
+
+    <pre><code is:raw>// ✗ Lento - renderiza en bucle
+for (let i = 0; i < 1000; i++) {
+  BunnyJS.li()
+    .text(`Item ${i}`)
+    .insertIn(list); // Redibuja cada vez
+}
+
+// ✓ Rápido - una inserción
+const items = [];
+for (let i = 0; i < 1000; i++) {
+  items.push(BunnyJS.li().text(`Item ${i}`));
+}
+items.forEach(item => item.insertIn(list));</code></pre>
+
+    <h2>Reportar Bugs</h2>
+
+    <p>Si encontraste un bug real, abre un issue en GitHub con:</p>
+    <ul>
+      <li>Versión de Bunny-JS</li>
+      <li>Navegador y versión</li>
+      <li>Código reproducible mínimo</li>
+      <li>Comportamiento esperado vs actual</li>
+      <li>Mensaje de error completo</li>
+    </ul>
+
+    <div class="nav">
+      <a href="/bunny-js/patterns">← Patrones</a>
+      <a href="/bunny-js">Volver al inicio →</a>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,67 @@
+---
+interface Props {
+  language?: string;
+  title?: string;
+}
+
+const { language = "typescript", title } = Astro.props;
+---
+
+<style>
+  .code-block {
+    margin: var(--space-lg) 0;
+  }
+
+  .code-header {
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border-default);
+    border-bottom: none;
+    padding: var(--space-md) var(--space-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .code-title {
+    color: var(--color-primary-400);
+    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+
+  .code-language {
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+  }
+
+  .code-content {
+    background-color: var(--color-surface-sunken);
+    border: 1px solid var(--color-border-default);
+    border-top: none;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    overflow-x: auto;
+  }
+
+  .code-content :global(pre) {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+  }
+</style>
+
+<div class="code-block">
+  {
+    title && (
+      <div class="code-header">
+        <span class="code-title">{title}</span>
+        <span class="code-language">{language}</span>
+      </div>
+    )
+  }
+  <div class="code-content">
+    <slot />
+  </div>
+</div>
