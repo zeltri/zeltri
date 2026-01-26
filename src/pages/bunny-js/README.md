@@ -94,7 +94,7 @@ pnpm add @crobf/bunny-js
 ### Crear Elementos
 
 ```typescript
-import { BunnyJS } from "@crobf/bunny-js";
+import { BunnyJS } from "@crobf/bunny-js/src/bunny";
 
 // Crear un botón
 const btn = BunnyJS.button().text("Comprar").bg("#007bff").color("#fff");
@@ -155,7 +155,7 @@ form.insertIn(document.body);
 ### Todo List
 
 ```typescript
-import { BunnyJS } from "@crobf/bunny-js";
+import { BunnyJS } from "@crobf/bunny-js/src/bunny";
 
 const app = BunnyJS.div({ class: "app" });
 const input = BunnyJS.input({ placeholder: "Nueva tarea..." });
@@ -364,7 +364,7 @@ Más detalles en [Documentación de Arquitectura](./docs/arquitectura.md).
 ### Clonar el repositorio
 
 ```bash
-git clone https://github.com/CROBF-tech/bunny-js.git
+git clone https://github.com/zeltri/bunny-js.git
 cd bunny-js
 ```
 
