@@ -1,0 +1,104 @@
+---
+// BunnyCTA.astro - Final Call to Action section
+---
+
+<section
+  class="bunny-section"
+  style="background-color: var(--color-bunny-darker);"
+>
+  <div class="bunny-container px-4 md:px-8">
+    <div class="max-w-3xl mx-auto text-center">
+      <!-- Emoji -->
+      <div class="text-6xl mb-6">🐰</div>
+
+      <!-- Heading -->
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-bunny-text-light">
+        Ready to Simplify Your Code?
+      </h2>
+
+      <!-- Description -->
+      <p class="text-lg mb-8 text-bunny-text-muted max-w-xl mx-auto">
+        Join developers who are writing cleaner, more intuitive DOM manipulation
+        code with Bunny-JS.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          href="#getting-started"
+          class="bunny-btn bunny-btn-primary text-base px-8 py-4"
+        >
+          <svg
+            class="w-5 h-5 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+            ></path>
+          </svg>
+          Install Now
+        </a>
+        <a
+          href="/bunny-js/docs"
+          class="bunny-btn bunny-btn-outline text-base px-8 py-4"
+        >
+          <svg
+            class="w-5 h-5 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+            ></path>
+          </svg>
+          Read the Docs
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div
+        class="mt-12 pt-8 border-t flex flex-wrap justify-center gap-8 md:gap-16"
+        style="border-color: var(--color-bunny-border);"
+      >
+        <div class="text-center">
+          <div
+            class="text-3xl font-bold"
+            style="color: var(--color-bunny-primary);"
+          >
+            ~3KB
+          </div>
+          <div class="text-sm text-bunny-text-muted mt-1">
+            Minified + Gzipped
+          </div>
+        </div>
+        <div class="text-center">
+          <div
+            class="text-3xl font-bold"
+            style="color: var(--color-bunny-primary);"
+          >
+            0
+          </div>
+          <div class="text-sm text-bunny-text-muted mt-1">Dependencies</div>
+        </div>
+        <div class="text-center">
+          <div
+            class="text-3xl font-bold"
+            style="color: var(--color-bunny-primary);"
+          >
+            100%
+          </div>
+          <div class="text-sm text-bunny-text-muted mt-1">TypeScript</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+/* Bunny-JS Theme - Yellow & Dark Blue aesthetic */
+@theme {
+  /* Primary Colors - Vibrant Yellow */
+  --color-bunny-primary: #ffc700;
+  --color-bunny-primary-hover: #e6b400;
+  --color-bunny-primary-light: #ffd633;
+
+  /* Background Colors - Dark Blue/Black */
+  --color-bunny-dark: #0b0e14;
+  --color-bunny-darker: #080a0f;
+  --color-bunny-card: #12161f;
+  --color-bunny-code-bg: #1a1f2b;
+
+  /* Text Colors */
+  --color-bunny-text-light: #ffffff;
+  --color-bunny-text-muted: #9ca3af;
+  --color-bunny-text-dark: #0b0e14;
+
+  /* Accent Colors */
+  --color-bunny-white: #ffffff;
+  --color-bunny-border: #2d3748;
+
+  /* Fonts */
+  --font-bunny-sans: "Inter", "Roboto", system-ui, -apple-system, sans-serif;
+  --font-bunny-mono: "Fira Code", "Monaco", "Cascadia Code", monospace;
+}
+
+/* Base styles for Bunny-JS pages */
+.bunny-page {
+  font-family: var(--font-bunny-sans);
+  background-color: var(--color-bunny-dark);
+  color: var(--color-bunny-text-light);
+}
+
+/* Button variants */
+.bunny-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.bunny-btn-primary {
+  background-color: var(--color-bunny-primary);
+  color: var(--color-bunny-text-dark);
+  border: 2px solid var(--color-bunny-primary);
+}
+
+.bunny-btn-primary:hover {
+  background-color: var(--color-bunny-primary-hover);
+  border-color: var(--color-bunny-primary-hover);
+  transform: translateY(-1px);
+}
+
+.bunny-btn-outline {
+  background-color: transparent;
+  color: var(--color-bunny-text-light);
+  border: 2px solid var(--color-bunny-text-light);
+}
+
+.bunny-btn-outline:hover {
+  background-color: var(--color-bunny-text-light);
+  color: var(--color-bunny-text-dark);
+}
+
+.bunny-btn-outline-dark {
+  background-color: transparent;
+  color: var(--color-bunny-text-dark);
+  border: 2px solid var(--color-bunny-text-dark);
+}
+
+.bunny-btn-outline-dark:hover {
+  background-color: var(--color-bunny-text-dark);
+  color: var(--color-bunny-primary);
+}
+
+/* Code block styling */
+.bunny-code-block {
+  background-color: var(--color-bunny-code-bg);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  font-family: var(--font-bunny-mono);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  overflow-x: auto;
+}
+
+.bunny-code-block .keyword {
+  color: #c792ea;
+}
+
+.bunny-code-block .function {
+  color: #82aaff;
+}
+
+.bunny-code-block .string {
+  color: #c3e88d;
+}
+
+.bunny-code-block .comment {
+  color: #546e7a;
+}
+
+.bunny-code-block .property {
+  color: #ffcb6b;
+}
+
+.bunny-code-block .punctuation {
+  color: #89ddff;
+}
+
+/* Check icon styling */
+.bunny-check-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: var(--color-bunny-dark);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bunny-check-icon svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--color-bunny-primary);
+}
+
+/* Section spacing */
+.bunny-section {
+  padding: 5rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .bunny-section {
+    padding: 6rem 2rem;
+  }
+}
+
+/* Container */
+.bunny-container {
+  max-width: 72rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Navbar */
+.bunny-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding: 1rem 1.5rem;
+  background-color: rgba(11, 14, 20, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-bunny-border);
+}
+
+/* Footer */
+.bunny-footer {
+  background-color: var(--color-bunny-darker);
+  border-top: 1px solid var(--color-bunny-border);
+  padding: 3rem 1rem 2rem;
+}
+
+/* Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.bunny-float {
+  animation: float 3s ease-in-out infinite;
+}

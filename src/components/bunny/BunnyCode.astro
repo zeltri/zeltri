@@ -1,0 +1,172 @@
+---
+// BunnyCode.astro - Code examples section with dark background
+
+const codeExample1 = `<span class="comment">// Import the library (use full path for now)</span>
+<span class="keyword">import</span> { BunnyJS } <span class="keyword">from</span> <span class="string">"@crobf/bunny-js/src/bunny"</span>;
+
+<span class="comment">// Create a styled div</span>
+<span class="keyword">const</span> card = BunnyJS.<span class="function">div</span>({
+  <span class="property">class</span>: <span class="string">"card"</span>,
+  <span class="property">id</span>: <span class="string">"my-card"</span>
+});
+
+<span class="comment">// Chain methods fluently</span>
+card
+  .<span class="function">text</span>(<span class="string">"Hello, World!"</span>)
+  .<span class="function">bg</span>(<span class="string">"#FFC700"</span>)
+  .<span class="function">insertIn</span>(<span class="string">"body"</span>);`;
+
+const codeExample2 = `<span class="comment">// Select existing elements</span>
+<span class="keyword">const</span> btn = BunnyJS.<span class="function">select</span>(<span class="string">"#submit-btn"</span>);
+
+<span class="comment">// Add event listeners</span>
+btn.<span class="function">on</span>(<span class="string">"click"</span>, () =&gt; {
+  console.<span class="function">log</span>(<span class="string">"Clicked!"</span>);
+});
+
+<span class="comment">// Select multiple elements</span>
+<span class="keyword">const</span> items = BunnyJS.<span class="function">selectAll</span>(<span class="string">".item"</span>);
+
+items.<span class="function">forEach</span>(item =&gt; {
+  item.<span class="function">toggle</span>(<span class="string">"active"</span>);
+});`;
+
+const codeExample3 = `<span class="comment">// Apply styles with decorators</span>
+<span class="keyword">const</span> box = BunnyJS.<span class="function">div</span>();
+
+box
+  .<span class="function">bg</span>(<span class="string">"linear-gradient(...)"</span>)
+  .<span class="function">color</span>(<span class="string">"white"</span>)
+  .<span class="function">font</span>(<span class="string">"Inter, sans-serif"</span>)
+  .<span class="function">spacing</span>(<span class="string">"1rem"</span>, <span class="string">"2rem"</span>);
+
+<span class="comment">// Show and hide</span>
+box.<span class="function">hide</span>();
+box.<span class="function">show</span>(<span class="string">"flex"</span>);`;
+
+const codeExample4 = `<span class="comment">// Create a list dynamically</span>
+<span class="keyword">const</span> list = BunnyJS.<span class="function">ul</span>({ 
+  <span class="property">class</span>: <span class="string">"menu"</span> 
+});
+
+<span class="keyword">const</span> menuItems = [<span class="string">"Home"</span>, <span class="string">"About"</span>, <span class="string">"Contact"</span>];
+
+menuItems.<span class="function">forEach</span>(text =&gt; {
+  list.<span class="function">item</span>(text, { 
+    <span class="property">class</span>: <span class="string">"menu-item"</span> 
+  });
+});
+
+list.<span class="function">insertIn</span>(<span class="string">"nav"</span>);`;
+---
+
+<section
+  id="code"
+  class="bunny-section"
+  style="background-color: var(--color-bunny-dark);"
+>
+  <div class="bunny-container px-4 md:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-bunny-text-light">
+        See It In Action
+      </h2>
+      <p class="text-lg max-w-2xl mx-auto text-bunny-text-muted">
+        Clean, readable code that does exactly what you expect.
+      </p>
+    </div>
+
+    <!-- Code Examples -->
+    <div class="code-grid">
+      <!-- Example 1: Creating Elements -->
+      <div class="code-card">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="dot"></span>
+          <span class="text-sm font-medium text-bunny-text-light"
+            >Creating Elements</span
+          >
+        </div>
+        <div class="bunny-code-block">
+          <pre><code set:html={codeExample1} /></pre>
+        </div>
+      </div>
+
+      <!-- Example 2: Selecting & Events -->
+      <div class="code-card">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="dot"></span>
+          <span class="text-sm font-medium text-bunny-text-light"
+            >Selection & Events</span
+          >
+        </div>
+        <div class="bunny-code-block">
+          <pre><code set:html={codeExample2} /></pre>
+        </div>
+      </div>
+
+      <!-- Example 3: Styling -->
+      <div class="code-card">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="dot"></span>
+          <span class="text-sm font-medium text-bunny-text-light"
+            >Styling Methods</span
+          >
+        </div>
+        <div class="bunny-code-block">
+          <pre><code set:html={codeExample3} /></pre>
+        </div>
+      </div>
+
+      <!-- Example 4: Building Lists -->
+      <div class="code-card">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="dot"></span>
+          <span class="text-sm font-medium text-bunny-text-light"
+            >Building Components</span
+          >
+        </div>
+        <div class="bunny-code-block">
+          <pre><code set:html={codeExample4} /></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .code-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .code-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .code-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 9999px;
+    background-color: var(--color-bunny-primary);
+  }
+
+  pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .bunny-code-block {
+    flex: 1;
+  }
+</style>

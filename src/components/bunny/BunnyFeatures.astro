@@ -1,0 +1,86 @@
+---
+// BunnyFeatures.astro - Features section with white background
+
+const features = [
+  {
+    title: "Lightweight & Fast",
+    description: "No dependencies, minimal footprint. Bunny-JS is designed to be as light as its namesake is quick."
+  },
+  {
+    title: "Fluent Chainable API",
+    description: "Chain methods naturally: element.text('Hello').bg('blue').on('click', handler)"
+  },
+  {
+    title: "TypeScript Ready",
+    description: "Full TypeScript support with comprehensive type definitions for a better developer experience."
+  },
+  {
+    title: "Intuitive Element Creation",
+    description: "Create any HTML element with BunnyJS.div(), BunnyJS.span(), BunnyJS.button(), and more."
+  },
+  {
+    title: "Powerful Selection",
+    description: "Select existing DOM elements with select() and selectAll(), enhanced with Bunny methods."
+  },
+  {
+    title: "No Prototype Pollution",
+    description: "Elements are enhanced individually without modifying global HTMLElement prototypes."
+  }
+];
+---
+
+<section id="features" class="bunny-section" style="background-color: white;">
+  <div class="bunny-container px-4 md:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--color-bunny-text-dark);">
+        Why Choose Bunny-JS?
+      </h2>
+      <p class="text-lg max-w-2xl mx-auto" style="color: var(--color-bunny-text-muted);">
+        A modern approach to DOM manipulation that respects simplicity and developer happiness.
+      </p>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {features.map((feature) => (
+        <div class="flex items-start gap-4 p-6 rounded-xl transition-all hover:shadow-lg" style="background-color: #F9FAFB;">
+          <!-- Check Icon -->
+          <div class="bunny-check-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          
+          <!-- Content -->
+          <div>
+            <h3 class="text-lg font-semibold mb-2" style="color: var(--color-bunny-text-dark);">
+              {feature.title}
+            </h3>
+            <p class="text-sm leading-relaxed" style="color: var(--color-bunny-text-muted);">
+              {feature.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+  }
+
+  @media (min-width: 768px) {
+    .md\:grid-cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .lg\:grid-cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

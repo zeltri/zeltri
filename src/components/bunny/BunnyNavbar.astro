@@ -1,0 +1,121 @@
+---
+// BunnyNavbar.astro - Navigation bar for Bunny-JS
+---
+
+<nav class="bunny-navbar">
+  <div class="bunny-container flex items-center justify-between">
+    <!-- Logo -->
+    <a
+      href="/bunny-js"
+      class="flex items-center gap-2 text-xl font-bold text-bunny-text-light hover:text-bunny-primary transition-colors"
+    >
+      <span class="text-2xl">🐰</span>
+      <span>Bunny</span>
+    </a>
+
+    <!-- Navigation Links (Desktop) -->
+    <div class="hidden md:flex items-center gap-8">
+      <a
+        href="#features"
+        class="text-sm text-bunny-text-muted hover:text-bunny-text-light transition-colors"
+      >
+        Features
+      </a>
+      <a
+        href="#code"
+        class="text-sm text-bunny-text-muted hover:text-bunny-text-light transition-colors"
+      >
+        Examples
+      </a>
+      <a
+        href="/bunny-js/docs"
+        class="text-sm text-bunny-text-muted hover:text-bunny-text-light transition-colors"
+      >
+        Docs
+      </a>
+      <a
+        href="https://github.com/CROBF-tech/bunny-js"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-sm text-bunny-text-muted hover:text-bunny-text-light transition-colors"
+      >
+        GitHub
+      </a>
+    </div>
+
+    <!-- CTA Button -->
+    <a href="#getting-started" class="bunny-btn bunny-btn-primary text-sm">
+      Get Started
+    </a>
+
+    <!-- Mobile Menu Button -->
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden p-2 text-bunny-text-light"
+      aria-label="Toggle menu"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden mt-4 pb-4 border-t border-bunny-border pt-4"
+  >
+    <div class="flex flex-col gap-4">
+      <a
+        href="#features"
+        class="text-sm text-bunny-text-muted hover:text-bunny-text-light transition-colors"
+      >
+        Features
+      </a>
+      <a
+        href="#code"
+        class="text-sm text-bunny-text-muted hover:text-bunny-text-light transition-colors"
+      >
+        Examples
+      </a>
+      <a
+        href="/bunny-js/docs"
+        class="text-sm text-bunny-text-muted hover:text-bunny-text-light transition-colors"
+      >
+        Docs
+      </a>
+      <a
+        href="https://github.com/CROBF-tech/bunny-js"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-sm text-bunny-text-muted hover:text-bunny-text-light transition-colors"
+      >
+        GitHub
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  mobileMenuBtn?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("hidden");
+  });
+</script>
+
+<style>
+  nav {
+    font-family: var(--font-bunny-sans);
+  }
+</style>

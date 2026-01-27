@@ -1,0 +1,24 @@
+---
+import BunnyLayout from "../../layouts/BunnyLayout.astro";
+import BunnyNavbar from "../../components/bunny/BunnyNavbar.astro";
+import BunnyHero from "../../components/bunny/BunnyHero.astro";
+import BunnyFeatures from "../../components/bunny/BunnyFeatures.astro";
+import BunnyCode from "../../components/bunny/BunnyCode.astro";
+import BunnyInstall from "../../components/bunny/BunnyInstall.astro";
+import BunnyCTA from "../../components/bunny/BunnyCTA.astro";
+import BunnyFooter from "../../components/bunny/BunnyFooter.astro";
+---
+
+<BunnyLayout>
+  <BunnyNavbar />
+
+  <main>
+    <BunnyHero />
+    <BunnyFeatures />
+    <BunnyCode />
+    <BunnyInstall />
+    <BunnyCTA />
+  </main>
+
+  <BunnyFooter />
+</BunnyLayout>

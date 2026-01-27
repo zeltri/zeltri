@@ -1,0 +1,152 @@
+---
+// BunnyInstall.astro - Installation section
+
+const importCode = `<span class="comment">// Use the full path (temporary)</span>
+<span class="keyword">import</span> { BunnyJS } <span class="keyword">from</span> <span class="string">"@crobf/bunny-js/src/bunny"</span>;
+
+<span class="comment">// You're ready to go! 🐰</span>`;
+---
+
+<section
+  id="getting-started"
+  class="bunny-section"
+  style="background-color: var(--color-bunny-card);"
+>
+  <div class="bunny-container px-4 md:px-8">
+    <div class="max-w-3xl mx-auto text-center">
+      <!-- Section Header -->
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-bunny-text-light">
+        Get Started in Seconds
+      </h2>
+      <p class="text-lg mb-8 text-bunny-text-muted">
+        Install via npm or yarn and start building immediately.
+      </p>
+
+      <!-- Install Commands -->
+      <div class="install-commands">
+        <!-- NPM -->
+        <div class="install-box">
+          <span class="text-bunny-text-muted text-sm">$</span>
+          <code class="text-bunny-text-light font-mono"
+            >npm install @crobf/bunny-js</code
+          >
+          <button
+            class="copy-btn"
+            data-copy="npm install @crobf/bunny-js"
+            aria-label="Copy npm command"
+          >
+            <svg
+              class="w-4 h-4 text-bunny-text-muted"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Yarn -->
+        <div class="install-box">
+          <span class="text-bunny-text-muted text-sm">$</span>
+          <code class="text-bunny-text-light font-mono"
+            >yarn add @crobf/bunny-js</code
+          >
+          <button
+            class="copy-btn"
+            data-copy="yarn add @crobf/bunny-js"
+            aria-label="Copy yarn command"
+          >
+            <svg
+              class="w-4 h-4 text-bunny-text-muted"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Import -->
+      <div class="bunny-code-block text-left max-w-lg mx-auto mt-8">
+        <pre><code set:html={importCode} /></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll(".copy-btn").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const text = btn.getAttribute("data-copy");
+      if (text) {
+        await navigator.clipboard.writeText(text);
+
+        // Visual feedback
+        const svg = btn.querySelector("svg");
+        if (svg) {
+          svg.innerHTML =
+            '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />';
+          setTimeout(() => {
+            svg.innerHTML =
+              '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />';
+          }, 2000);
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  pre {
+    margin: 0;
+  }
+
+  .install-commands {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 640px) {
+    .install-commands {
+      flex-direction: row;
+    }
+  }
+
+  .install-box {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--color-bunny-code-bg);
+  }
+
+  .copy-btn {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .copy-btn:hover {
+    background-color: var(--color-bunny-dark);
+  }
+</style>

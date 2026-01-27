@@ -1,0 +1,732 @@
+---
+import BunnyLayout from "../../../layouts/BunnyLayout.astro";
+import BunnyNavbar from "../../../components/bunny/BunnyNavbar.astro";
+import BunnyFooter from "../../../components/bunny/BunnyFooter.astro";
+
+const importWarning = `<span class="keyword">import</span> { BunnyJS } <span class="keyword">from</span> <span class="string">"@crobf/bunny-js/src/bunny"</span>;`;
+
+const quickStartCode = `<span class="keyword">import</span> { BunnyJS } <span class="keyword">from</span> <span class="string">"@crobf/bunny-js/src/bunny"</span>;
+
+<span class="comment">// Create an element</span>
+<span class="keyword">const</span> div = BunnyJS.<span class="function">div</span>({ <span class="property">class</span>: <span class="string">"my-class"</span> });
+div.<span class="function">text</span>(<span class="string">"Hello World!"</span>).<span class="function">bg</span>(<span class="string">"lightblue"</span>).<span class="function">insertIn</span>(document.body);
+
+<span class="comment">// Select existing elements</span>
+<span class="keyword">const</span> button = BunnyJS.<span class="function">select</span>(<span class="string">"#my-button"</span>);
+button.<span class="function">on</span>(<span class="string">"click"</span>, () =&gt; <span class="function">alert</span>(<span class="string">"Click!"</span>));`;
+
+const proxyCode = `<span class="keyword">import</span> { BunnyJS } <span class="keyword">from</span> <span class="string">"@crobf/bunny-js/src/bunny"</span>;
+
+<span class="comment">// When you call BunnyJS.div(), the proxy:</span>
+<span class="comment">// 1. Intercepts the 'div' property</span>
+<span class="comment">// 2. Verifies it's a valid HTML tag</span>
+<span class="comment">// 3. Creates a &lt;div&gt; element using document.createElement()</span>
+<span class="comment">// 4. Applies the provided attributes</span>
+<span class="comment">// 5. Enhances the element with additional methods</span>
+<span class="comment">// 6. Returns the enhanced element</span>
+
+<span class="keyword">const</span> div = BunnyJS.<span class="function">div</span>({ <span class="property">class</span>: <span class="string">"container"</span>, <span class="property">id</span>: <span class="string">"main"</span> });`;
+
+const selectCode = `<span class="comment">// BunnyJS.select(selector: string)</span>
+<span class="comment">// Selects an element from the DOM and enhances it</span>
+
+<span class="keyword">const</span> header = BunnyJS.<span class="function">select</span>(<span class="string">".header"</span>);
+
+<span class="keyword">if</span> (header) {
+  header.<span class="function">text</span>(<span class="string">"New title"</span>).<span class="function">bg</span>(<span class="string">"#f0f0f0"</span>);
+}
+
+<span class="comment">// BunnyJS.selectAll(selector: string)</span>
+<span class="comment">// Selects multiple elements and enhances them</span>
+
+<span class="keyword">const</span> items = BunnyJS.<span class="function">selectAll</span>(<span class="string">".item"</span>);
+
+items.<span class="function">forEach</span>((item) =&gt; {
+  item.<span class="function">toggle</span>(<span class="string">"active"</span>);
+});`;
+
+const actionsCode = `<span class="comment">// show(mode?: string): void</span>
+<span class="keyword">const</span> modal = BunnyJS.<span class="function">div</span>({ <span class="property">class</span>: <span class="string">"modal"</span> });
+modal.<span class="function">show</span>();        <span class="comment">// display: ""</span>
+modal.<span class="function">show</span>(<span class="string">"flex"</span>);  <span class="comment">// display: "flex"</span>
+
+<span class="comment">// hide(): void</span>
+modal.<span class="function">hide</span>();        <span class="comment">// display: "none"</span>
+
+<span class="comment">// toggle(className: string | string[]): void</span>
+modal.<span class="function">toggle</span>(<span class="string">"active"</span>);              <span class="comment">// One class</span>
+modal.<span class="function">toggle</span>([<span class="string">"active"</span>, <span class="string">"visible"</span>]); <span class="comment">// Multiple</span>
+
+<span class="comment">// insertIn(query: string | HTMLElement): void</span>
+modal.<span class="function">insertIn</span>(document.body);   <span class="comment">// Direct element</span>
+modal.<span class="function">insertIn</span>(<span class="string">".container"</span>);    <span class="comment">// CSS selector</span>`;
+
+const helpersCode = `<span class="comment">// on(event, handler): BunnyExtendedElement</span>
+<span class="keyword">const</span> btn = BunnyJS.<span class="function">button</span>({ <span class="property">class</span>: <span class="string">"btn"</span> });
+btn.<span class="function">on</span>(<span class="string">"click"</span>, (e) =&gt; console.<span class="function">log</span>(<span class="string">"Click!"</span>));
+
+<span class="comment">// text(value: string): BunnyExtendedElement</span>
+btn.<span class="function">text</span>(<span class="string">"Click here"</span>);
+
+<span class="comment">// item(value, attrs): BunnyExtendedElement (for ul/ol)</span>
+<span class="keyword">const</span> ul = BunnyJS.<span class="function">ul</span>();
+ul.<span class="function">item</span>(<span class="string">"Item 1"</span>, { <span class="property">class</span>: <span class="string">"list-item"</span> });
+ul.<span class="function">item</span>(<span class="string">"Item 2"</span>, { <span class="property">class</span>: <span class="string">"list-item"</span> });
+
+<span class="comment">// attr(key, value?): Gets or sets attribute</span>
+<span class="keyword">const</span> img = BunnyJS.<span class="function">img</span>();
+img.<span class="function">attr</span>(<span class="string">"src"</span>, <span class="string">"image.jpg"</span>);  <span class="comment">// Sets</span>
+<span class="keyword">const</span> src = img.<span class="function">attr</span>(<span class="string">"src"</span>);     <span class="comment">// Gets</span>`;
+
+const stylesCode = `<span class="comment">// bg(color: string): BunnyExtendedElement</span>
+<span class="keyword">const</span> card = BunnyJS.<span class="function">div</span>();
+card.<span class="function">bg</span>(<span class="string">"#ffffff"</span>);
+card.<span class="function">bg</span>(<span class="string">"rgb(255, 255, 255)"</span>);
+
+<span class="comment">// color(color: string): BunnyExtendedElement</span>
+card.<span class="function">color</span>(<span class="string">"#333333"</span>);
+
+<span class="comment">// font(font: string): BunnyExtendedElement</span>
+card.<span class="function">font</span>(<span class="string">"16px Arial, sans-serif"</span>);
+
+<span class="comment">// spacing(margin?, padding?): BunnyExtendedElement</span>
+card.<span class="function">spacing</span>(<span class="string">"20px"</span>);                  <span class="comment">// Only margin</span>
+card.<span class="function">spacing</span>(<span class="string">"10px"</span>, <span class="string">"20px"</span>);          <span class="comment">// Margin + padding</span>
+card.<span class="function">spacing</span>([<span class="string">"10px"</span>, <span class="string">"20px"</span>]);        <span class="comment">// [vertical, horizontal]</span>`;
+
+const chainingCode = `<span class="keyword">const</span> card = BunnyJS.<span class="function">div</span>({ <span class="property">class</span>: <span class="string">"card"</span> })
+  .<span class="function">text</span>(<span class="string">"Card title"</span>)
+  .<span class="function">bg</span>(<span class="string">"#ffffff"</span>)
+  .<span class="function">color</span>(<span class="string">"#333333"</span>)
+  .<span class="function">font</span>(<span class="string">"16px Arial"</span>)
+  .<span class="function">spacing</span>(<span class="string">"20px"</span>, <span class="string">"15px"</span>)
+  .<span class="function">on</span>(<span class="string">"click"</span>, () =&gt; console.<span class="function">log</span>(<span class="string">"Click!"</span>))
+  .<span class="function">on</span>(<span class="string">"mouseenter"</span>, (e) =&gt; e.target.style.opacity = <span class="string">"0.8"</span>)
+  .<span class="function">on</span>(<span class="string">"mouseleave"</span>, (e) =&gt; e.target.style.opacity = <span class="string">"1"</span>)
+  .<span class="function">insertIn</span>(document.body);`;
+
+const todoExample = `<span class="keyword">const</span> todoList = BunnyJS.<span class="function">ul</span>({ <span class="property">class</span>: <span class="string">"todo-list"</span> });
+
+<span class="keyword">const</span> tasks = [<span class="string">"Buy milk"</span>, <span class="string">"Call doctor"</span>, <span class="string">"Exercise"</span>];
+
+tasks.<span class="function">forEach</span>((task) =&gt; {
+  <span class="keyword">const</span> li = BunnyJS.<span class="function">li</span>().<span class="function">text</span>(task);
+  li.<span class="function">on</span>(<span class="string">"click"</span>, () =&gt; li.<span class="function">toggle</span>(<span class="string">"completed"</span>));
+  li.<span class="function">insertIn</span>(todoList);
+});
+
+todoList.<span class="function">insertIn</span>(document.body);`;
+
+const formExample = `<span class="keyword">const</span> form = BunnyJS.<span class="function">form</span>({ <span class="property">class</span>: <span class="string">"contact-form"</span> });
+
+<span class="keyword">const</span> nameInput = BunnyJS.<span class="function">input</span>({
+  <span class="property">type</span>: <span class="string">"text"</span>,
+  <span class="property">placeholder</span>: <span class="string">"Your name"</span>,
+  <span class="property">required</span>: <span class="keyword">true</span>,
+});
+
+<span class="keyword">const</span> submitBtn = BunnyJS.<span class="function">button</span>({ <span class="property">type</span>: <span class="string">"submit"</span> });
+submitBtn.<span class="function">text</span>(<span class="string">"Send"</span>);
+
+form.<span class="function">on</span>(<span class="string">"submit"</span>, (e) =&gt; {
+  e.<span class="function">preventDefault</span>();
+  <span class="function">alert</span>(<span class="string">"Form submitted!"</span>);
+});
+
+form.<span class="function">appendChild</span>(nameInput);
+form.<span class="function">appendChild</span>(submitBtn);
+form.<span class="function">insertIn</span>(document.body);`;
+
+const sections = [
+  { id: "installation", title: "Installation" },
+  { id: "quick-start", title: "Quick Start" },
+  { id: "api-reference", title: "API Reference" },
+  { id: "proxy", title: "The Main Proxy" },
+  { id: "selection", title: "Selection Methods" },
+  { id: "actions", title: "Action Methods" },
+  { id: "helpers", title: "Helper Methods" },
+  { id: "styles", title: "Style Methods" },
+  { id: "chaining", title: "Method Chaining" },
+  { id: "examples", title: "Advanced Examples" },
+];
+---
+
+<BunnyLayout
+  title="Documentation | Bunny-JS"
+  description="Complete documentation for Bunny-JS - A lightweight library for simplified DOM manipulation."
+>
+  <BunnyNavbar />
+
+  <main class="pt-24">
+    <!-- Hero Header -->
+    <section
+      class="py-12 md:py-16"
+      style="background-color: var(--color-bunny-primary);"
+    >
+      <div class="bunny-container px-4 md:px-8">
+        <div class="max-w-4xl">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-4xl">📖</span>
+            <span
+              class="px-3 py-1 rounded-full text-sm font-medium"
+              style="background-color: var(--color-bunny-dark); color: var(--color-bunny-primary);"
+            >
+              v2.0.0
+            </span>
+          </div>
+          <h1
+            class="text-4xl md:text-5xl font-extrabold mb-4"
+            style="color: var(--color-bunny-text-dark);"
+          >
+            Documentation
+          </h1>
+          <p
+            class="text-lg md:text-xl"
+            style="color: var(--color-bunny-text-dark); opacity: 0.8;"
+          >
+            Everything you need to know to get started with Bunny-JS and master
+            DOM manipulation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-12" style="background-color: var(--color-bunny-dark);">
+      <div class="bunny-container px-4 md:px-8">
+        <div class="docs-layout">
+          <!-- Sidebar -->
+          <aside class="docs-sidebar">
+            <nav class="sticky top-24">
+              <h3
+                class="text-sm font-semibold uppercase tracking-wider mb-4"
+                style="color: var(--color-bunny-primary);"
+              >
+                Contents
+              </h3>
+              <ul class="space-y-2">
+                {
+                  sections.map((section) => (
+                    <li>
+                      <a
+                        href={`#${section.id}`}
+                        class="text-sm text-bunny-text-muted hover:text-bunny-primary transition-colors"
+                      >
+                        {section.title}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </nav>
+          </aside>
+
+          <!-- Content -->
+          <div class="docs-content">
+            <!-- Important Warning -->
+            <div class="warning-box">
+              <div class="flex items-start gap-3">
+                <span class="text-2xl">⚠️</span>
+                <div>
+                  <h4
+                    class="font-bold mb-2"
+                    style="color: var(--color-bunny-primary);"
+                  >
+                    Important: Import Path
+                  </h4>
+                  <p class="text-sm text-bunny-text-muted mb-3">
+                    In the current version (2.0.0), you must use the full import
+                    path. This will be fixed in an upcoming release.
+                  </p>
+                  <div class="bunny-code-block">
+                    <pre><code set:html={importWarning} /></pre>
+                  </div>
+                  <p class="text-xs text-bunny-text-muted mt-2">
+                    ❌ <code class="text-red-400">@crobf/bunny-js</code> &nbsp;→&nbsp;
+                    ✅ <code class="text-green-400"
+                      >@crobf/bunny-js/src/bunny</code
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Installation -->
+            <section id="installation" class="docs-section">
+              <h2 class="docs-heading">🚀 Installation</h2>
+              <p class="docs-text">
+                Install Bunny-JS using your preferred package manager:
+              </p>
+              <div class="install-commands-docs">
+                <div class="install-box-docs">
+                  <span class="text-bunny-text-muted">$</span>
+                  <code>npm install @crobf/bunny-js</code>
+                </div>
+                <div class="install-box-docs">
+                  <span class="text-bunny-text-muted">$</span>
+                  <code>yarn add @crobf/bunny-js</code>
+                </div>
+                <div class="install-box-docs">
+                  <span class="text-bunny-text-muted">$</span>
+                  <code>pnpm add @crobf/bunny-js</code>
+                </div>
+              </div>
+            </section>
+
+            <!-- Quick Start -->
+            <section id="quick-start" class="docs-section">
+              <h2 class="docs-heading">📖 Quick Start</h2>
+              <p class="docs-text">
+                Get up and running with Bunny-JS in seconds. Here's a simple
+                example:
+              </p>
+              <div class="bunny-code-block">
+                <pre><code set:html={quickStartCode} /></pre>
+              </div>
+            </section>
+
+            <!-- API Reference -->
+            <section id="api-reference" class="docs-section">
+              <h2 class="docs-heading">🎯 API Reference</h2>
+              <p class="docs-text">
+                Bunny-JS provides a clean and intuitive API for DOM
+                manipulation. Below you'll find detailed documentation for all
+                available methods.
+              </p>
+            </section>
+
+            <!-- The Main Proxy -->
+            <section id="proxy" class="docs-section">
+              <h3 class="docs-subheading">The Main Proxy</h3>
+              <p class="docs-text">
+                Bunny-JS uses a JavaScript <code>Proxy</code> to dynamically intercept
+                calls to properties and convert them into HTML elements. This allows
+                an intuitive syntax where any valid HTML tag automatically becomes
+                a method.
+              </p>
+              <div class="bunny-code-block">
+                <pre><code set:html={proxyCode} /></pre>
+              </div>
+            </section>
+
+            <!-- Selection Methods -->
+            <section id="selection" class="docs-section">
+              <h3 class="docs-subheading">Selection Methods</h3>
+              <p class="docs-text">
+                The special methods <code>select()</code> and <code
+                  >selectAll()</code
+                > allow working with existing DOM elements.
+              </p>
+              <div class="bunny-code-block">
+                <pre><code set:html={selectCode} /></pre>
+              </div>
+            </section>
+
+            <!-- Action Methods -->
+            <section id="actions" class="docs-section">
+              <h3 class="docs-subheading">Action Methods</h3>
+              <p class="docs-text">
+                Action methods control the visibility and position of elements
+                in the DOM.
+              </p>
+              <div class="method-list">
+                <div class="method-item">
+                  <code class="method-name">show(mode?)</code>
+                  <span class="method-desc"
+                    >Shows the element by setting display</span
+                  >
+                </div>
+                <div class="method-item">
+                  <code class="method-name">hide()</code>
+                  <span class="method-desc"
+                    >Hides the element (display: none)</span
+                  >
+                </div>
+                <div class="method-item">
+                  <code class="method-name">toggle(className)</code>
+                  <span class="method-desc">Toggles CSS classes</span>
+                </div>
+                <div class="method-item">
+                  <code class="method-name">insertIn(query)</code>
+                  <span class="method-desc"
+                    >Inserts the element into a container</span
+                  >
+                </div>
+              </div>
+              <div class="bunny-code-block mt-4">
+                <pre><code set:html={actionsCode} /></pre>
+              </div>
+            </section>
+
+            <!-- Helper Methods -->
+            <section id="helpers" class="docs-section">
+              <h3 class="docs-subheading">Helper Methods</h3>
+              <p class="docs-text">
+                Helper methods facilitate common element manipulation and event
+                management.
+              </p>
+              <div class="method-list">
+                <div class="method-item">
+                  <code class="method-name">on(event, handler)</code>
+                  <span class="method-desc">Adds an event listener</span>
+                </div>
+                <div class="method-item">
+                  <code class="method-name">text(value)</code>
+                  <span class="method-desc">Sets the text content</span>
+                </div>
+                <div class="method-item">
+                  <code class="method-name">link(value, href, attrs)</code>
+                  <span class="method-desc"
+                    >Creates a link inside the element</span
+                  >
+                </div>
+                <div class="method-item">
+                  <code class="method-name">item(value, attrs)</code>
+                  <span class="method-desc">Adds a list item (for ul/ol)</span>
+                </div>
+                <div class="method-item">
+                  <code class="method-name">attr(key, value?)</code>
+                  <span class="method-desc">Gets or sets an attribute</span>
+                </div>
+              </div>
+              <div class="bunny-code-block mt-4">
+                <pre><code set:html={helpersCode} /></pre>
+              </div>
+            </section>
+
+            <!-- Style Methods -->
+            <section id="styles" class="docs-section">
+              <h3 class="docs-subheading">Style Methods</h3>
+              <p class="docs-text">
+                Style methods provide a fluent way to apply CSS to elements.
+              </p>
+              <div class="method-list">
+                <div class="method-item">
+                  <code class="method-name">bg(color)</code>
+                  <span class="method-desc">Sets the background color</span>
+                </div>
+                <div class="method-item">
+                  <code class="method-name">color(color)</code>
+                  <span class="method-desc">Sets the text color</span>
+                </div>
+                <div class="method-item">
+                  <code class="method-name">font(font)</code>
+                  <span class="method-desc">Sets the font</span>
+                </div>
+                <div class="method-item">
+                  <code class="method-name">spacing(margin?, padding?)</code>
+                  <span class="method-desc">Sets margin and padding</span>
+                </div>
+              </div>
+              <div class="bunny-code-block mt-4">
+                <pre><code set:html={stylesCode} /></pre>
+              </div>
+            </section>
+
+            <!-- Method Chaining -->
+            <section id="chaining" class="docs-section">
+              <h3 class="docs-subheading">Method Chaining</h3>
+              <p class="docs-text">
+                Most methods return <code>BunnyExtendedElement</code> allowing you
+                to chain multiple operations in a fluent, readable way.
+              </p>
+              <div class="bunny-code-block">
+                <pre><code set:html={chainingCode} /></pre>
+              </div>
+            </section>
+
+            <!-- Advanced Examples -->
+            <section id="examples" class="docs-section">
+              <h2 class="docs-heading">📚 Advanced Examples</h2>
+
+              <h4 class="text-lg font-semibold text-bunny-text-light mb-3 mt-6">
+                Todo List
+              </h4>
+              <div class="bunny-code-block">
+                <pre><code set:html={todoExample} /></pre>
+              </div>
+
+              <h4 class="text-lg font-semibold text-bunny-text-light mb-3 mt-8">
+                Interactive Form
+              </h4>
+              <div class="bunny-code-block">
+                <pre><code set:html={formExample} /></pre>
+              </div>
+            </section>
+
+            <!-- Features -->
+            <section class="docs-section">
+              <h2 class="docs-heading">✨ Features</h2>
+              <div class="features-grid">
+                <div class="feature-card">
+                  <span class="text-2xl mb-2">🪶</span>
+                  <h4 class="font-semibold text-bunny-text-light">
+                    Lightweight
+                  </h4>
+                  <p class="text-sm text-bunny-text-muted">
+                    No external dependencies
+                  </p>
+                </div>
+                <div class="feature-card">
+                  <span class="text-2xl mb-2">🔗</span>
+                  <h4 class="font-semibold text-bunny-text-light">Fluent</h4>
+                  <p class="text-sm text-bunny-text-muted">
+                    Chainable API for readable code
+                  </p>
+                </div>
+                <div class="feature-card">
+                  <span class="text-2xl mb-2">🛡️</span>
+                  <h4 class="font-semibold text-bunny-text-light">
+                    TypeScript
+                  </h4>
+                  <p class="text-sm text-bunny-text-muted">Full type support</p>
+                </div>
+                <div class="feature-card">
+                  <span class="text-2xl mb-2">🌐</span>
+                  <h4 class="font-semibold text-bunny-text-light">Universal</h4>
+                  <p class="text-sm text-bunny-text-muted">
+                    Works in all modern browsers
+                  </p>
+                </div>
+                <div class="feature-card">
+                  <span class="text-2xl mb-2">🎨</span>
+                  <h4 class="font-semibold text-bunny-text-light">Intuitive</h4>
+                  <p class="text-sm text-bunny-text-muted">
+                    Simple methods for common tasks
+                  </p>
+                </div>
+                <div class="feature-card">
+                  <span class="text-2xl mb-2">🚀</span>
+                  <h4 class="font-semibold text-bunny-text-light">Fast</h4>
+                  <p class="text-sm text-bunny-text-muted">
+                    Optimized for performance
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <!-- Contributing -->
+            <section class="docs-section">
+              <h2 class="docs-heading">🤝 Contributing</h2>
+              <p class="docs-text">
+                Contributions are welcome! If you find a bug or have an idea to
+                improve Bunny-JS, please open an issue or send a pull request on
+                <a
+                  href="https://github.com/CROBF-tech/bunny-js"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-bunny-primary hover:underline">GitHub</a
+                >.
+              </p>
+            </section>
+
+            <!-- License -->
+            <section
+              class="docs-section border-t pt-8"
+              style="border-color: var(--color-bunny-border);"
+            >
+              <p class="text-sm text-bunny-text-muted">
+                This project is licensed under the MIT License. Made with ❤️ by <a
+                  href="https://crobf.tech"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-bunny-primary hover:underline">CROBF</a
+                >
+              </p>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <BunnyFooter />
+</BunnyLayout>
+
+<style>
+  .docs-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .docs-layout {
+      grid-template-columns: 200px 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .docs-sidebar {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .docs-sidebar {
+      display: block;
+    }
+  }
+
+  .docs-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .docs-sidebar li {
+    padding: 0.25rem 0;
+  }
+
+  .docs-content {
+    max-width: 48rem;
+  }
+
+  .docs-section {
+    margin-bottom: 3rem;
+  }
+
+  .docs-heading {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-bunny-text-light);
+    margin-bottom: 1rem;
+  }
+
+  .docs-subheading {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-bunny-text-light);
+    margin-bottom: 0.75rem;
+  }
+
+  .docs-text {
+    color: var(--color-bunny-text-muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .docs-text code {
+    background-color: var(--color-bunny-code-bg);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    color: var(--color-bunny-primary);
+  }
+
+  .warning-box {
+    background-color: rgba(255, 199, 0, 0.1);
+    border: 1px solid var(--color-bunny-primary);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .install-commands-docs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .install-box-docs {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--color-bunny-code-bg);
+    font-family: var(--font-bunny-mono);
+    font-size: 0.875rem;
+    color: var(--color-bunny-text-light);
+  }
+
+  .method-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  .method-item {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-bunny-border);
+  }
+
+  .method-name {
+    font-family: var(--font-bunny-mono);
+    font-size: 0.875rem;
+    color: var(--color-bunny-primary);
+    background-color: var(--color-bunny-code-bg);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  .method-desc {
+    font-size: 0.875rem;
+    color: var(--color-bunny-text-muted);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .features-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .feature-card {
+    background-color: var(--color-bunny-card);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .space-y-2 > * + * {
+    margin-top: 0.5rem;
+  }
+
+  .sticky {
+    position: sticky;
+  }
+
+  .top-24 {
+    top: 6rem;
+  }
+
+  .mt-4 {
+    margin-top: 1rem;
+  }
+
+  .mt-6 {
+    margin-top: 1.5rem;
+  }
+
+  .mt-8 {
+    margin-top: 2rem;
+  }
+
+  .pt-8 {
+    padding-top: 2rem;
+  }
+
+  .border-t {
+    border-top-width: 1px;
+    border-top-style: solid;
+  }
+</style>
