@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@crobf/bunny-js':
-        specifier: ^2.0.1
-        version: 2.0.1
       '@fontsource/inter':
         specifier: ^5.2.8
         version: 5.2.8
@@ -155,9 +152,6 @@ packages:
   '@capsizecss/unpack@4.0.0':
     resolution: {integrity: sha512-VERIM64vtTP1C4mxQ5thVT9fK0apjPFobqybMtA1UdUujWka24ERHbRHFGmpbbhp73MhV+KSsHQH9C6uOTdEQA==}
     engines: {node: '>=18'}
-
-  '@crobf/bunny-js@2.0.1':
-    resolution: {integrity: sha512-WAlk+VWFIE9YwTaCNzHMtoBUJdrQt2/OTkJ8eBYTA8lDydzhHk49B0vNoTb9vJw12lXfI8Mdhjo0/LkMQqr+iQ==}
 
   '@emnapi/runtime@1.8.1':
     resolution: {integrity: sha512-mehfKSMWjjNol8659Z8KxEMrdSJDDot5SXMq00dM8BN4o+CLNXQ0xH2V7EchNHV4RmbZLmmPdEaXZc5H2FXmDg==}
@@ -1670,10 +1664,6 @@ packages:
   trough@2.2.0:
     resolution: {integrity: sha512-tmMpK00BjZiUyVyvrBK7knerNgmgvcV/KLVyuma/SC+TQN167GrMRciANTz09+k3zW8L8t60jWO1GpfkZdjTaw==}
 
-  tsc@2.0.4:
-    resolution: {integrity: sha512-fzoSieZI5KKJVBYGvwbVZs/J5za84f2lSTLPYf6AGiIf43tZ3GNrI1QzTLcjtyDDP4aLxd46RTZq1nQxe7+k5Q==}
-    hasBin: true
-
   tsconfck@3.1.6:
     resolution: {integrity: sha512-ks6Vjr/jEw0P1gmOVwutM3B7fWxoWBL2KRDb1JfqGVawBmO5UsvmWOQFGHBPl5yxYz4eERr19E6L7NMv+Fej4w==}
     engines: {node: ^18 || >=20}
@@ -2124,11 +2114,6 @@ snapshots:
   '@capsizecss/unpack@4.0.0':
     dependencies:
       fontkitten: 1.0.2
-
-  '@crobf/bunny-js@2.0.1':
-    dependencies:
-      tsc: 2.0.4
-      typescript: 5.9.3
 
   '@emnapi/runtime@1.8.1':
     dependencies:
@@ -3827,8 +3812,6 @@ snapshots:
   trim-lines@3.0.1: {}
 
   trough@2.2.0: {}
-
-  tsc@2.0.4: {}
 
   tsconfck@3.1.6(typescript@5.9.3):
     optionalDependencies:
