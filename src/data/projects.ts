@@ -17,4 +17,12 @@ export const projects: Project[] = [
         status: 'active',
         tags: ['librery', 'typescript'],
     },
+    {
+        id: '2',
+        name: 'CHRONO',
+        slug: 'chrono-terminal',
+        description: 'Emulador de terminal',
+        status: 'active',
+        tags: ['terminal', 'rust'],
+    },
 ];

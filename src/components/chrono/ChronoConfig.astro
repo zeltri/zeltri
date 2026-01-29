@@ -1,0 +1,158 @@
+---
+// ChronoConfig.astro - Configuration example section
+---
+
+<section id="configuration" class="chrono-section bg-chrono-bg-darker">
+  <div class="chrono-container">
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <!-- Left: Description -->
+      <div>
+        <span class="chrono-badge chrono-badge-yellow mb-4">Configuración</span>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-chrono-text-light">
+          Personaliza tu experiencia
+        </h2>
+        <p class="text-lg mb-6 text-chrono-text-muted">
+          CHRONO se configura mediante un archivo TOML ubicado en
+          <code class="chrono-inline-code"
+            >~/.config/terminal-emulator/config.toml</code
+          >
+        </p>
+
+        <div class="space-y-4">
+          <div class="flex items-start gap-3">
+            <div
+              class="chrono-feature-icon chrono-feature-icon-blue text-lg w-10 h-10"
+            >
+              🔤
+            </div>
+            <div>
+              <h4 class="font-semibold text-chrono-text-light">Tipografía</h4>
+              <p class="text-sm text-chrono-text-muted">
+                Familia de fuente y tamaño configurable. Cascadia Code por
+                defecto.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <div
+              class="chrono-feature-icon chrono-feature-icon-magenta text-lg w-10 h-10"
+            >
+              🎨
+            </div>
+            <div>
+              <h4 class="font-semibold text-chrono-text-light">Colores</h4>
+              <p class="text-sm text-chrono-text-muted">
+                Override de la paleta ANSI completa. OneDark Pro incluido.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <div
+              class="chrono-feature-icon chrono-feature-icon-green text-lg w-10 h-10"
+            >
+              📜
+            </div>
+            <div>
+              <h4 class="font-semibold text-chrono-text-light">Scrollback</h4>
+              <p class="text-sm text-chrono-text-muted">
+                Configura líneas de historial. 10,000 por defecto.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <div
+              class="chrono-feature-icon chrono-feature-icon-cyan text-lg w-10 h-10"
+            >
+              🐚
+            </div>
+            <div>
+              <h4 class="font-semibold text-chrono-text-light">Shell</h4>
+              <p class="text-sm text-chrono-text-muted">
+                Especifica bash, zsh, fish o cualquier shell preferido.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Code Example -->
+      <div>
+        <div class="chrono-terminal">
+          <div class="chrono-terminal-header">
+            <div class="chrono-terminal-dot chrono-terminal-dot-red"></div>
+            <div class="chrono-terminal-dot chrono-terminal-dot-yellow"></div>
+            <div class="chrono-terminal-dot chrono-terminal-dot-green"></div>
+            <span class="chrono-terminal-title">config.toml</span>
+          </div>
+          <div class="chrono-terminal-body text-sm">
+            <div class="text-chrono-text-comment">
+              # ~/.config/terminal-emulator/config.toml
+            </div>
+            <br />
+            <div class="text-chrono-yellow">[font]</div>
+            <div>
+              <span class="text-chrono-blue">family</span> = <span
+                class="text-chrono-green">"Cascadia Code"</span>
+            </div>
+            <div>
+              <span class="text-chrono-blue">size</span> = <span
+                class="text-chrono-orange">14</span>
+            </div>
+            <br />
+            <div class="text-chrono-yellow">[colors]</div>
+            <div class="text-chrono-text-comment">
+              # OneDark Pro theme (default)
+            </div>
+            <div>
+              <span class="text-chrono-blue">foreground</span> = [<span
+                class="text-chrono-orange">171</span
+              >, <span class="text-chrono-orange">178</span>, <span
+                class="text-chrono-orange">191</span
+              >]
+            </div>
+            <div>
+              <span class="text-chrono-blue">background</span> = [<span
+                class="text-chrono-orange">40</span
+              >, <span class="text-chrono-orange">44</span>, <span
+                class="text-chrono-orange">52</span
+              >]
+            </div>
+            <br />
+            <div class="text-chrono-yellow">[terminal]</div>
+            <div>
+              <span class="text-chrono-blue">rows</span> = <span
+                class="text-chrono-orange">24</span>
+            </div>
+            <div>
+              <span class="text-chrono-blue">cols</span> = <span
+                class="text-chrono-orange">80</span>
+            </div>
+            <div>
+              <span class="text-chrono-blue">scrollback</span> = <span
+                class="text-chrono-orange">10000</span>
+            </div>
+            <br />
+            <div class="text-chrono-yellow">[shell]</div>
+            <div>
+              <span class="text-chrono-blue">program</span> = <span
+                class="text-chrono-green">"/bin/zsh"</span>
+            </div>
+            <br />
+            <div class="text-chrono-yellow">[rendering]</div>
+            <div>
+              <span class="text-chrono-blue">smart_detection</span> = <span
+                class="text-chrono-magenta">true</span>
+            </div>
+            <div>
+              <span class="text-chrono-blue">json_colors</span> = <span
+                class="text-chrono-magenta">true</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,268 @@
+---
+import ChronoDocsLayout from "../../../layouts/ChronoDocsLayout.astro";
+---
+
+<ChronoDocsLayout
+  title="Sugerencias de Autocompletado | CHRONO Terminal"
+  description="Sistema de sugerencias y autocompletado visual de CHRONO Terminal"
+  activeDoc="suggestions"
+>
+  <h1>Sugerencias de Autocompletado</h1>
+
+  <p class="text-lg text-chrono-text-muted">
+    CHRONO soporta autocompletado visual completo con sugerencias renderizadas
+    en gris claro, integrado con shells modernos como fish y zsh.
+  </p>
+
+  <h2>Secuencias ANSI Soportadas</h2>
+
+  <p>
+    El terminal implementa dos secuencias CSI personalizadas para controlar el
+    modo de sugerencias:
+  </p>
+
+  <ul>
+    <li>
+      <code>ESC[53m</code> — Activa el modo sugerencia (texto aparece en gris claro)
+    </li>
+    <li>
+      <code>ESC[54m</code> — Desactiva el modo sugerencia (vuelve a renderizado normal)
+    </li>
+  </ul>
+
+  <h3>Ejemplo de uso</h3>
+
+  <pre><code># Mostrar sugerencia después del comando
+echo -n "$ git"
+echo -ne "\033[53m"  # Activar sugerencia
+echo -n " status"
+echo -ne "\033[54m"  # Desactivar sugerencia
+echo ""</code></pre>
+
+  <h2>✨ Características Implementadas</h2>
+
+  <h3>1. Modo de Sugerencia Automático</h3>
+
+  <ul>
+    <li>
+      Las celdas escritas en modo sugerencia se marcan automáticamente con <code
+        >is_suggestion = true</code
+      >
+    </li>
+    <li>Se renderizan en color gris claro definido en el tema</li>
+  </ul>
+
+  <h3>2. Limpieza Inteligente</h3>
+
+  <ul>
+    <li>
+      Las sugerencias se limpian automáticamente cuando se escribe texto normal
+    </li>
+    <li>
+      Las sugerencias desaparecen al presionar teclas (comportamiento esperado)
+    </li>
+  </ul>
+
+  <h3>3. Integración con ANSI Parser</h3>
+
+  <ul>
+    <li>Secuencias CSI 53 y 54 integradas en el handler SGR</li>
+    <li>Procesamiento automático sin intervención manual</li>
+  </ul>
+
+  <h3>4. API Pública en Screen</h3>
+
+  <pre><code>// Activar modo sugerencia
+screen.start_suggestion();
+
+// Escribir texto de sugerencia
+screen.write_char('h');
+screen.write_char('e');
+screen.write_char('l');
+screen.write_char('p');
+
+// Desactivar modo sugerencia
+screen.end_suggestion();
+
+// Limpiar sugerencias manualmente
+screen.clear_suggestions();
+
+// Verificar si hay sugerencias
+if screen.has_suggestions() {
+    // ...
+}</code></pre>
+
+  <h2>🎨 Colores</h2>
+
+  <p>
+    Las sugerencias se muestran automáticamente en un <strong>gris claro</strong
+    > para diferenciarlas del texto normal:
+  </p>
+
+  <ul>
+    <li>
+      <strong>Color actual:</strong>
+      <code>rgb(75, 82, 95)</code> — Gris claro sutil (#4b525f)
+    </li>
+    <li>
+      <strong>Alternativa más clara:</strong> Puedes ajustar en <code
+        >theme.rs</code
+      > cambiando <code>fg_suggestion</code>
+    </li>
+  </ul>
+
+  <h3>Cambiar el color</h3>
+
+  <pre><code>// En crates/renderer/src/theme.rs
+fg_suggestion: (75, 82, 95),     // Actual (gris claro)
+// O prueba:
+fg_suggestion: (100, 107, 120),  // Gris más claro
+fg_suggestion: (60, 67, 80),     // Gris más oscuro</code></pre>
+
+  <h2>🐚 Integración con Shells</h2>
+
+  <h3>Fish Shell</h3>
+
+  <p>Fish puede configurarse para usar estas secuencias:</p>
+
+  <pre><code># ~/.config/fish/config.fish
+function fish_postexec
+    # Las sugerencias de fish ya funcionarán visualmente
+end</code></pre>
+
+  <h3>Zsh con zsh-autosuggestions</h3>
+
+  <pre><code># ~/.zshrc
+# Las autosuggestions de zsh funcionarán automáticamente
+# si el plugin está configurado para usar color dim/gray</code></pre>
+
+  <h2>🧪 Testing Manual</h2>
+
+  <h3>Prueba Básica</h3>
+
+  <pre><code># Compilar y ejecutar
+cargo build && cargo run
+
+# Dentro del terminal, ejecutar:
+./test_suggestions.sh</code></pre>
+
+  <h3>Prueba con printf</h3>
+
+  <pre><code>printf "$ git\033[53m status\033[54m\n"
+printf "$ cargo\033[53m build --release\033[54m\n"</code></pre>
+
+  <h3>Prueba con echo</h3>
+
+  <pre><code>echo -e "$ ls\033[53m -la /home\033[54m"</code></pre>
+
+  <h2>🔧 Arquitectura Técnica</h2>
+
+  <h3>Flujo de Datos</h3>
+
+  <ol>
+    <li>
+      <strong>Shell envía:</strong>
+      <code>ESC[53m</code> → Texto sugerido → <code>ESC[54m</code>
+    </li>
+    <li><strong>Parser ANSI</strong> detecta secuencia CSI 53</li>
+    <li>
+      <strong>Handler</strong> llama a <code>screen.start_suggestion()</code>
+    </li>
+    <li><strong>Screen</strong> marca <code>suggestion_mode = true</code></li>
+    <li>
+      <strong>write_char</strong> marca cada celda con <code
+        >is_suggestion = true</code
+      >
+    </li>
+    <li>
+      <strong>Renderer</strong> detecta <code>cell.is_suggestion</code> y usa <code
+        >fg_suggestion_u32()</code
+      >
+    </li>
+    <li>
+      <strong>Usuario escribe</strong> → <code>write_char</code> limpia sugerencias
+      automáticamente
+    </li>
+  </ol>
+
+  <h3>Archivos Modificados</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Archivo</th>
+        <th>Cambios</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>crates/core/src/cell.rs</code></td>
+        <td
+          >Campo <code>is_suggestion</code> y método <code>as_suggestion()</code
+          ></td
+        >
+      </tr>
+      <tr>
+        <td><code>crates/core/src/screen.rs</code></td>
+        <td>Modo sugerencia, métodos de control y limpieza automática</td>
+      </tr>
+      <tr>
+        <td><code>crates/ansi/src/handler.rs</code></td>
+        <td>Secuencias CSI 53/54 en handler SGR</td>
+      </tr>
+      <tr>
+        <td><code>crates/renderer/src/theme.rs</code></td>
+        <td
+          >Color <code>fg_suggestion</code> y método <code
+            >fg_suggestion_u32()</code
+          ></td
+        >
+      </tr>
+      <tr>
+        <td><code>crates/renderer/src/cpu.rs</code></td>
+        <td>Renderizado prioritario de sugerencias</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>📋 API de Celdas</h2>
+
+  <pre><code>use terminal_core::Cell;
+
+// Crear una celda de sugerencia
+let suggestion_cell = Cell::as_suggestion('t');
+
+// O marcar una celda existente como sugerencia
+let mut cell = Cell::new('t');
+cell.is_suggestion = true;</code></pre>
+
+  <h2>⚠️ Limitaciones Conocidas</h2>
+
+  <ul>
+    <li>
+      <strong>Shells nativos:</strong> Los shells estándar (bash, sh) no envían automáticamente
+      estas secuencias
+    </li>
+    <li>
+      <strong>Configuración requerida:</strong> Fish y zsh requieren configuración/plugins
+      para usar las secuencias
+    </li>
+    <li>
+      <strong>Sin API remota:</strong> No hay comunicación bidireccional (solo rendering)
+    </li>
+  </ul>
+
+  <h2>💡 Sugerencias de Historial</h2>
+
+  <p>
+    CHRONO también incluye sugerencias inteligentes basadas en el historial de
+    comandos, similar a Kitty Terminal:
+  </p>
+
+  <ul>
+    <li>🔹 Busca automáticamente en comandos previos</li>
+    <li>🔹 Sugiere basándose en primeras letras</li>
+    <li>🔹 Acepta con Tab o flecha derecha</li>
+    <li>🔹 Actualización en tiempo real</li>
+  </ul>
+</ChronoDocsLayout>

@@ -1,0 +1,83 @@
+---
+// ChronoFeatures.astro - Features grid section
+
+const features = [
+  {
+    icon: "🎨",
+    iconClass: "chrono-feature-icon-blue",
+    title: "Colores ANSI Completos",
+    description:
+      "Soporte para 16 colores indexados, 256 colores y RGB true color (24-bit). Todos los atributos de texto: bold, italic, underline, strikethrough.",
+  },
+  {
+    icon: "⚡",
+    iconClass: "chrono-feature-icon-yellow",
+    title: "Alto Rendimiento",
+    description:
+      "Arquitectura modular optimizada con renderizador CPU eficiente usando fontdue. Zero-copy donde es posible.",
+  },
+  {
+    icon: "🔍",
+    iconClass: "chrono-feature-icon-cyan",
+    title: "Context-Aware",
+    description:
+      "Detección inteligente de errores, warnings, stack traces y archivos. Click para abrir archivos en tu editor.",
+  },
+  {
+    icon: "💡",
+    iconClass: "chrono-feature-icon-green",
+    title: "Smart Suggestions",
+    description:
+      "Autocompletado visual en gris claro estilo Fish/Zsh. Sugerencias basadas en historial de comandos.",
+  },
+  {
+    icon: "📊",
+    iconClass: "chrono-feature-icon-magenta",
+    title: "Output Tipado",
+    description:
+      "Detección y colores automáticos para logs estructurados, JSON, tablas ASCII y stack traces multi-lenguaje.",
+  },
+  {
+    icon: "⚙️",
+    iconClass: "chrono-feature-icon-red",
+    title: "Configurable",
+    description:
+      "Archivo TOML para personalizar fuente, colores, tamaño y scrollback. Tema OneDark Pro por defecto.",
+  },
+];
+---
+
+<section id="features" class="chrono-section">
+  <div class="chrono-container">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <span class="chrono-badge chrono-badge-blue mb-4">Features</span>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-chrono-text-light">
+        Todo lo que necesitas en un terminal
+      </h2>
+      <p class="text-lg max-w-2xl mx-auto text-chrono-text-muted">
+        CHRONO combina rendimiento, elegancia y características inteligentes
+        para una experiencia de terminal moderna.
+      </p>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        features.map((feature) => (
+          <div class="chrono-feature-card">
+            <div class={`chrono-feature-icon ${feature.iconClass}`}>
+              {feature.icon}
+            </div>
+            <h3 class="text-lg font-semibold mb-2 text-chrono-text-light">
+              {feature.title}
+            </h3>
+            <p class="text-sm leading-relaxed text-chrono-text-muted">
+              {feature.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

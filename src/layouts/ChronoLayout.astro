@@ -1,0 +1,65 @@
+---
+import "../styles/chrono.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "CHRONO Terminal | Modern Terminal Emulator in Rust",
+  description = "Un emulador de terminal moderno, rápido y elegante escrito en Rust. Con soporte ANSI completo, detección inteligente de contenido y tema OneDark Pro.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <!-- Theme Color (OneDark background) -->
+    <meta name="theme-color" content="#282c34" />
+
+    <!-- Google Fonts: Inter + Cascadia Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="chrono-page antialiased">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  /* Force dark mode - prevent any light mode */
+  @media (prefers-color-scheme: light) {
+    :root {
+      color-scheme: dark;
+    }
+  }
+</style>

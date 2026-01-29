@@ -1,0 +1,674 @@
+@import "tailwindcss";
+
+/* CHRONO Terminal Theme - OneDark Pro aesthetic */
+/* Dark mode only - no light mode support */
+@theme {
+  /* OneDark Pro Background Colors */
+  --color-chrono-bg: #282c34;
+  --color-chrono-bg-dark: #21252b;
+  --color-chrono-bg-darker: #1e2127;
+  --color-chrono-bg-lighter: #2c323c;
+  --color-chrono-card: #21252b;
+  --color-chrono-code-bg: #1e2127;
+  --color-chrono-gutter: #4b5263;
+
+  /* OneDark Pro Primary Colors */
+  --color-chrono-red: #e06c75;
+  --color-chrono-green: #98c379;
+  --color-chrono-yellow: #e5c07b;
+  --color-chrono-blue: #61afef;
+  --color-chrono-magenta: #c678dd;
+  --color-chrono-cyan: #56b6c2;
+  --color-chrono-orange: #d19a66;
+
+  /* Text Colors */
+  --color-chrono-text: #abb2bf;
+  --color-chrono-text-light: #ffffff;
+  --color-chrono-text-muted: #5c6370;
+  --color-chrono-text-comment: #7f848e;
+
+  /* Accent - Using cyan as primary accent */
+  --color-chrono-primary: #61afef;
+  --color-chrono-primary-hover: #528bcc;
+  --color-chrono-accent: #56b6c2;
+
+  /* Border */
+  --color-chrono-border: #3e4451;
+  --color-chrono-border-light: #4b5263;
+
+  /* Fonts */
+  --font-chrono-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-chrono-mono: "Cascadia Code", "Fira Code", "JetBrains Mono", monospace;
+}
+
+/* Base styles for CHRONO pages */
+.chrono-page {
+  font-family: var(--font-chrono-sans);
+  background-color: var(--color-chrono-bg);
+  color: var(--color-chrono-text);
+  min-height: 100vh;
+}
+
+/* Typography */
+.chrono-heading {
+  color: var(--color-chrono-text-light);
+  font-weight: 700;
+}
+
+.chrono-subheading {
+  color: var(--color-chrono-text);
+  font-weight: 600;
+}
+
+/* Button variants */
+.chrono-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+  gap: 0.5rem;
+}
+
+.chrono-btn-primary {
+  background-color: var(--color-chrono-primary);
+  color: var(--color-chrono-bg-dark);
+  border: 2px solid var(--color-chrono-primary);
+}
+
+.chrono-btn-primary:hover {
+  background-color: var(--color-chrono-primary-hover);
+  border-color: var(--color-chrono-primary-hover);
+  transform: translateY(-1px);
+}
+
+.chrono-btn-outline {
+  background-color: transparent;
+  color: var(--color-chrono-text);
+  border: 2px solid var(--color-chrono-border-light);
+}
+
+.chrono-btn-outline:hover {
+  background-color: var(--color-chrono-bg-lighter);
+  border-color: var(--color-chrono-primary);
+  color: var(--color-chrono-text-light);
+}
+
+.chrono-btn-ghost {
+  background-color: transparent;
+  color: var(--color-chrono-text-muted);
+  border: none;
+  padding: 0.5rem 1rem;
+}
+
+.chrono-btn-ghost:hover {
+  color: var(--color-chrono-text-light);
+  background-color: var(--color-chrono-bg-lighter);
+}
+
+/* Code block styling with OneDark syntax highlighting */
+.chrono-code-block {
+  background-color: var(--color-chrono-code-bg);
+  border: 1px solid var(--color-chrono-border);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  font-family: var(--font-chrono-mono);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  overflow-x: auto;
+}
+
+.chrono-code-block .keyword {
+  color: var(--color-chrono-magenta);
+}
+
+.chrono-code-block .function {
+  color: var(--color-chrono-blue);
+}
+
+.chrono-code-block .string {
+  color: var(--color-chrono-green);
+}
+
+.chrono-code-block .comment {
+  color: var(--color-chrono-text-comment);
+  font-style: italic;
+}
+
+.chrono-code-block .number {
+  color: var(--color-chrono-orange);
+}
+
+.chrono-code-block .type {
+  color: var(--color-chrono-yellow);
+}
+
+.chrono-code-block .variable {
+  color: var(--color-chrono-red);
+}
+
+.chrono-code-block .punctuation {
+  color: var(--color-chrono-text);
+}
+
+/* Inline code */
+.chrono-inline-code {
+  background-color: var(--color-chrono-bg-lighter);
+  color: var(--color-chrono-cyan);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-family: var(--font-chrono-mono);
+  font-size: 0.875em;
+}
+
+/* Cards */
+.chrono-card {
+  background-color: var(--color-chrono-card);
+  border: 1px solid var(--color-chrono-border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.chrono-card:hover {
+  border-color: var(--color-chrono-border-light);
+  transform: translateY(-2px);
+}
+
+.chrono-card-accent {
+  border-left: 3px solid var(--color-chrono-primary);
+}
+
+/* Feature cards with colored accents */
+.chrono-feature-card {
+  background-color: var(--color-chrono-card);
+  border: 1px solid var(--color-chrono-border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.chrono-feature-card:hover {
+  border-color: var(--color-chrono-primary);
+}
+
+.chrono-feature-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.chrono-feature-icon-blue {
+  background-color: rgba(97, 175, 239, 0.15);
+  color: var(--color-chrono-blue);
+}
+
+.chrono-feature-icon-green {
+  background-color: rgba(152, 195, 121, 0.15);
+  color: var(--color-chrono-green);
+}
+
+.chrono-feature-icon-yellow {
+  background-color: rgba(229, 192, 123, 0.15);
+  color: var(--color-chrono-yellow);
+}
+
+.chrono-feature-icon-red {
+  background-color: rgba(224, 108, 117, 0.15);
+  color: var(--color-chrono-red);
+}
+
+.chrono-feature-icon-magenta {
+  background-color: rgba(198, 120, 221, 0.15);
+  color: var(--color-chrono-magenta);
+}
+
+.chrono-feature-icon-cyan {
+  background-color: rgba(86, 182, 194, 0.15);
+  color: var(--color-chrono-cyan);
+}
+
+/* Section spacing */
+.chrono-section {
+  padding: 5rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .chrono-section {
+    padding: 6rem 2rem;
+  }
+}
+
+/* Container */
+.chrono-container {
+  max-width: 72rem;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+  .chrono-container {
+    padding: 0 2rem;
+  }
+}
+
+/* Navbar */
+.chrono-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding: 1rem 1.5rem;
+  background-color: rgba(40, 44, 52, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-chrono-border);
+}
+
+/* Footer */
+.chrono-footer {
+  background-color: var(--color-chrono-bg-darker);
+  border-top: 1px solid var(--color-chrono-border);
+  padding: 3rem 1rem 2rem;
+}
+
+/* Terminal window component */
+.chrono-terminal {
+  background-color: var(--color-chrono-bg-dark);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid var(--color-chrono-border);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.chrono-terminal-header {
+  background-color: var(--color-chrono-bg-darker);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--color-chrono-border);
+}
+
+.chrono-terminal-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+}
+
+.chrono-terminal-dot-red {
+  background-color: var(--color-chrono-red);
+}
+
+.chrono-terminal-dot-yellow {
+  background-color: var(--color-chrono-yellow);
+}
+
+.chrono-terminal-dot-green {
+  background-color: var(--color-chrono-green);
+}
+
+.chrono-terminal-title {
+  flex: 1;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--color-chrono-text-muted);
+  font-family: var(--font-chrono-mono);
+}
+
+.chrono-terminal-body {
+  padding: 1.5rem;
+  font-family: var(--font-chrono-mono);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  min-height: 200px;
+}
+
+.chrono-terminal-prompt {
+  color: var(--color-chrono-green);
+}
+
+.chrono-terminal-command {
+  color: var(--color-chrono-text-light);
+}
+
+.chrono-terminal-output {
+  color: var(--color-chrono-text);
+}
+
+.chrono-terminal-error {
+  color: var(--color-chrono-red);
+}
+
+.chrono-terminal-warning {
+  color: var(--color-chrono-yellow);
+}
+
+.chrono-terminal-info {
+  color: var(--color-chrono-blue);
+}
+
+.chrono-terminal-success {
+  color: var(--color-chrono-green);
+}
+
+/* Badge/Tag components */
+.chrono-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.chrono-badge-blue {
+  background-color: rgba(97, 175, 239, 0.15);
+  color: var(--color-chrono-blue);
+}
+
+.chrono-badge-green {
+  background-color: rgba(152, 195, 121, 0.15);
+  color: var(--color-chrono-green);
+}
+
+.chrono-badge-yellow {
+  background-color: rgba(229, 192, 123, 0.15);
+  color: var(--color-chrono-yellow);
+}
+
+.chrono-badge-red {
+  background-color: rgba(224, 108, 117, 0.15);
+  color: var(--color-chrono-red);
+}
+
+.chrono-badge-cyan {
+  background-color: rgba(86, 182, 194, 0.15);
+  color: var(--color-chrono-cyan);
+}
+
+/* Documentation specific styles */
+.chrono-docs-sidebar {
+  position: sticky;
+  top: 5rem;
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+.chrono-docs-nav-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--color-chrono-text-muted);
+  border-radius: 0.375rem;
+  transition: all 0.15s ease;
+  font-size: 0.875rem;
+}
+
+.chrono-docs-nav-item:hover {
+  color: var(--color-chrono-text-light);
+  background-color: var(--color-chrono-bg-lighter);
+}
+
+.chrono-docs-nav-item.active {
+  color: var(--color-chrono-primary);
+  background-color: rgba(97, 175, 239, 0.1);
+}
+
+.chrono-docs-nav-section {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-chrono-text-muted);
+  padding: 1rem 1rem 0.5rem;
+}
+
+/* Prose/Content styling for docs */
+.chrono-prose {
+  color: var(--color-chrono-text);
+  line-height: 1.8;
+}
+
+.chrono-prose h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--color-chrono-text-light);
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.chrono-prose h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-chrono-text-light);
+  margin-bottom: 0.75rem;
+  margin-top: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-chrono-border);
+}
+
+.chrono-prose h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-chrono-text-light);
+  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.chrono-prose h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-chrono-text);
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}
+
+.chrono-prose p {
+  margin-bottom: 1rem;
+}
+
+.chrono-prose ul,
+.chrono-prose ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.chrono-prose li {
+  margin-bottom: 0.5rem;
+}
+
+.chrono-prose ul li {
+  list-style-type: disc;
+}
+
+.chrono-prose ol li {
+  list-style-type: decimal;
+}
+
+.chrono-prose a {
+  color: var(--color-chrono-primary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.chrono-prose a:hover {
+  color: var(--color-chrono-cyan);
+  text-decoration: underline;
+}
+
+.chrono-prose code {
+  background-color: var(--color-chrono-bg-lighter);
+  color: var(--color-chrono-cyan);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-family: var(--font-chrono-mono);
+  font-size: 0.875em;
+}
+
+.chrono-prose pre {
+  background-color: var(--color-chrono-code-bg);
+  border: 1px solid var(--color-chrono-border);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.chrono-prose pre code {
+  background: none;
+  padding: 0;
+  color: var(--color-chrono-text);
+}
+
+.chrono-prose blockquote {
+  border-left: 3px solid var(--color-chrono-primary);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: var(--color-chrono-text-muted);
+  font-style: italic;
+}
+
+.chrono-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.chrono-prose th,
+.chrono-prose td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-chrono-border);
+  text-align: left;
+}
+
+.chrono-prose th {
+  background-color: var(--color-chrono-bg-lighter);
+  color: var(--color-chrono-text-light);
+  font-weight: 600;
+}
+
+.chrono-prose td {
+  background-color: var(--color-chrono-bg-dark);
+}
+
+/* Animations */
+@keyframes chrono-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes chrono-cursor-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.chrono-cursor {
+  display: inline-block;
+  width: 0.5rem;
+  height: 1.25rem;
+  background-color: var(--color-chrono-primary);
+  animation: chrono-cursor-blink 1s ease-in-out infinite;
+  vertical-align: text-bottom;
+}
+
+.chrono-glow {
+  box-shadow: 0 0 40px rgba(97, 175, 239, 0.15);
+}
+
+/* Scrollbar styling */
+.chrono-page ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.chrono-page ::-webkit-scrollbar-track {
+  background: var(--color-chrono-bg-dark);
+}
+
+.chrono-page ::-webkit-scrollbar-thumb {
+  background: var(--color-chrono-border-light);
+  border-radius: 4px;
+}
+
+.chrono-page ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-chrono-text-muted);
+}
+
+/* Alert/Notice boxes */
+.chrono-alert {
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.chrono-alert-info {
+  background-color: rgba(97, 175, 239, 0.1);
+  border: 1px solid rgba(97, 175, 239, 0.3);
+  color: var(--color-chrono-blue);
+}
+
+.chrono-alert-success {
+  background-color: rgba(152, 195, 121, 0.1);
+  border: 1px solid rgba(152, 195, 121, 0.3);
+  color: var(--color-chrono-green);
+}
+
+.chrono-alert-warning {
+  background-color: rgba(229, 192, 123, 0.1);
+  border: 1px solid rgba(229, 192, 123, 0.3);
+  color: var(--color-chrono-yellow);
+}
+
+.chrono-alert-error {
+  background-color: rgba(224, 108, 117, 0.1);
+  border: 1px solid rgba(224, 108, 117, 0.3);
+  color: var(--color-chrono-red);
+}
+
+/* Utility classes */
+.chrono-text-gradient {
+  background: linear-gradient(
+    90deg,
+    var(--color-chrono-primary),
+    var(--color-chrono-cyan)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.chrono-border-gradient {
+  border-image: linear-gradient(
+      90deg,
+      var(--color-chrono-primary),
+      var(--color-chrono-cyan)
+    )
+    1;
+}

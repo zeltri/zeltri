@@ -1,0 +1,159 @@
+---
+import ChronoDocsLayout from "../../../layouts/ChronoDocsLayout.astro";
+---
+
+<ChronoDocsLayout
+  title="Documentación | CHRONO Terminal"
+  description="Documentación completa del emulador de terminal CHRONO"
+  activeDoc="overview"
+>
+  <h1>🚀 CHRONO Terminal</h1>
+
+  <p class="text-lg text-chrono-text-muted">
+    Un emulador de terminal moderno, rápido y elegante escrito en Rust.
+  </p>
+
+  <div class="chrono-alert chrono-alert-info mt-6">
+    <span>ℹ️</span>
+    <div>
+      <strong>Versión actual:</strong> 1.0.0 —
+      <a href="https://github.com/zeltri/CHRONO/releases"
+        >Ver todas las releases</a
+      >
+    </div>
+  </div>
+
+  <h2>Descripción General</h2>
+
+  <p>
+    CHRONO es un emulador de terminal construido desde cero en Rust, diseñado
+    para desarrolladores que buscan una terminal moderna con alto rendimiento y
+    características inteligentes.
+  </p>
+
+  <h3>Características principales</h3>
+
+  <ul>
+    <li>
+      <strong>🎨 OneDark Pro Theme</strong> — Colores oscuros innovadores y profesionales
+    </li>
+    <li>
+      <strong>⚡ Alto Rendimiento</strong> — Arquitectura modular optimizada
+    </li>
+    <li>
+      <strong>🔍 Context-Aware</strong> — Detección inteligente de errores, warnings
+      y archivos
+    </li>
+    <li>
+      <strong>🎯 Stack Traces Navegables</strong> — Click para abrir archivos en tu
+      editor
+    </li>
+    <li>
+      <strong>🌈 Full ANSI Support</strong> — Colores 24-bit, estilos y secuencias
+      VT
+    </li>
+    <li>
+      <strong>📦 Arquitectura Modular</strong> — Crates independientes y testeables
+    </li>
+    <li>
+      <strong>💡 Smart Suggestions</strong> — Autocompletado visual en gris claro
+      (Fish/Zsh style)
+    </li>
+    <li>
+      <strong>🎨 Output Tipado</strong> — Detección y colores automáticos para logs,
+      JSON, tablas y más
+    </li>
+  </ul>
+
+  <h2>Inicio Rápido</h2>
+
+  <h3>Requisitos</h3>
+
+  <ul>
+    <li>
+      <strong>Rust 1.70+</strong> — <a href="https://rustup.rs/"
+        >Instalar Rust</a
+      >
+    </li>
+    <li>
+      <strong>Linux</strong> o <strong>macOS</strong> (Windows experimental)
+    </li>
+    <li>
+      <strong>Cascadia Code Font</strong> — <a
+        href="https://github.com/microsoft/cascadia-code/releases">Descargar</a
+      >
+    </li>
+  </ul>
+
+  <h3>Instalación</h3>
+
+  <pre><code># Clonar repositorio
+git clone https://github.com/zeltri/CHRONO.git
+cd CHRONO
+
+# Compilar en modo release
+cargo build --release
+
+# Ejecutar
+./target/release/terminal</code></pre>
+
+  <h2>Atajos de Teclado</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Atajo</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>Ctrl+Shift+C</code></td>
+        <td>Copiar selección</td>
+      </tr>
+      <tr>
+        <td><code>Ctrl+Shift+V</code></td>
+        <td>Pegar del clipboard</td>
+      </tr>
+      <tr>
+        <td><code>Ctrl+C</code></td>
+        <td>Enviar SIGINT (interrumpir)</td>
+      </tr>
+      <tr>
+        <td><code>Ctrl+D</code></td>
+        <td>Enviar EOF</td>
+      </tr>
+      <tr>
+        <td><code>Ctrl+L</code></td>
+        <td>Limpiar pantalla</td>
+      </tr>
+      <tr>
+        <td><code>Ctrl+Z</code></td>
+        <td>Suspender proceso</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Próximos Pasos</h2>
+
+  <ul>
+    <li>
+      <a href="/chrono-terminal/docs/installation"
+        >Guía de instalación completa</a
+      >
+    </li>
+    <li>
+      <a href="/chrono-terminal/docs/configuration"
+        >Configuración y personalización</a
+      >
+    </li>
+    <li>
+      <a href="/chrono-terminal/docs/smart-rendering"
+        >Smart Rendering en detalle</a
+      >
+    </li>
+    <li>
+      <a href="/chrono-terminal/docs/suggestions">Sistema de sugerencias</a>
+    </li>
+  </ul>
+</ChronoDocsLayout>

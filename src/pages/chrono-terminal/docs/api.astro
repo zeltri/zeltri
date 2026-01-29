@@ -1,0 +1,322 @@
+---
+import ChronoDocsLayout from "../../../layouts/ChronoDocsLayout.astro";
+---
+
+<ChronoDocsLayout
+  title="API Reference | CHRONO Terminal"
+  description="Referencia de la API pública de CHRONO Terminal"
+  activeDoc="api"
+>
+  <h1>API Reference</h1>
+
+  <p class="text-lg text-chrono-text-muted">
+    Referencia de la API pública de los crates de CHRONO para uso programático.
+  </p>
+
+  <h2>terminal-core</h2>
+
+  <h3>Screen</h3>
+
+  <p>El buffer de pantalla principal.</p>
+
+  <pre><code>use terminal_core::Screen;
+
+// Crear nueva pantalla
+let mut screen = Screen::new(80, 24);
+
+// Escribir carácter
+screen.write_char('H');
+
+// Mover cursor
+screen.move_cursor(10, 5);
+
+// Obtener celda
+let cell = screen.get_cell(0, 0);
+
+// Resize
+screen.resize(120, 40);
+
+// Clear
+screen.clear();</code></pre>
+
+  <h4>Métodos principales</h4>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Método</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>new(cols, rows)</code></td>
+        <td>Crea nueva pantalla</td>
+      </tr>
+      <tr>
+        <td><code>write_char(c)</code></td>
+        <td>Escribe carácter en posición actual</td>
+      </tr>
+      <tr>
+        <td><code>write_str(s)</code></td>
+        <td>Escribe string</td>
+      </tr>
+      <tr>
+        <td><code>move_cursor(x, y)</code></td>
+        <td>Mueve cursor a posición</td>
+      </tr>
+      <tr>
+        <td><code>get_cell(x, y)</code></td>
+        <td>Obtiene celda en posición</td>
+      </tr>
+      <tr>
+        <td><code>resize(cols, rows)</code></td>
+        <td>Redimensiona pantalla</td>
+      </tr>
+      <tr>
+        <td><code>clear()</code></td>
+        <td>Limpia pantalla</td>
+      </tr>
+      <tr>
+        <td><code>clear_line()</code></td>
+        <td>Limpia línea actual</td>
+      </tr>
+      <tr>
+        <td><code>scroll_up(n)</code></td>
+        <td>Scroll hacia arriba n líneas</td>
+      </tr>
+      <tr>
+        <td><code>scroll_down(n)</code></td>
+        <td>Scroll hacia abajo n líneas</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>Modo Sugerencia</h4>
+
+  <pre><code>// Activar modo sugerencia
+screen.start_suggestion();
+
+// Desactivar modo sugerencia
+screen.end_suggestion();
+
+// Limpiar sugerencias
+screen.clear_suggestions();
+
+// Verificar si hay sugerencias
+if screen.has_suggestions() {
+    // ...
+}</code></pre>
+
+  <h3>Cell</h3>
+
+  <p>Representa una celda del terminal.</p>
+
+  <pre><code>use terminal_core::Cell;
+
+// Crear celda con carácter
+let cell = Cell::new('A');
+
+// Crear celda de sugerencia
+let suggestion = Cell::as_suggestion('x');
+
+// Acceder a propiedades
+let c = cell.character;
+let fg = cell.foreground;
+let bg = cell.background;
+let is_bold = cell.bold;
+let is_suggestion = cell.is_suggestion;</code></pre>
+
+  <h4>Propiedades</h4>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Propiedad</th>
+        <th>Tipo</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>character</code></td>
+        <td><code>char</code></td>
+        <td>Carácter de la celda</td>
+      </tr>
+      <tr>
+        <td><code>foreground</code></td>
+        <td><code>Color</code></td>
+        <td>Color de primer plano</td>
+      </tr>
+      <tr>
+        <td><code>background</code></td>
+        <td><code>Color</code></td>
+        <td>Color de fondo</td>
+      </tr>
+      <tr>
+        <td><code>bold</code></td>
+        <td><code>bool</code></td>
+        <td>Texto en negrita</td>
+      </tr>
+      <tr>
+        <td><code>italic</code></td>
+        <td><code>bool</code></td>
+        <td>Texto en cursiva</td>
+      </tr>
+      <tr>
+        <td><code>underline</code></td>
+        <td><code>bool</code></td>
+        <td>Texto subrayado</td>
+      </tr>
+      <tr>
+        <td><code>strikethrough</code></td>
+        <td><code>bool</code></td>
+        <td>Texto tachado</td>
+      </tr>
+      <tr>
+        <td><code>inverse</code></td>
+        <td><code>bool</code></td>
+        <td>Colores invertidos</td>
+      </tr>
+      <tr>
+        <td><code>is_suggestion</code></td>
+        <td><code>bool</code></td>
+        <td>Es texto de sugerencia</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Color</h3>
+
+  <pre><code>use terminal_core::Color;
+
+// Color ANSI indexado
+let red = Color::Indexed(1);
+
+// Color RGB
+let custom = Color::Rgb(255, 100, 50);
+
+// Color por defecto
+let default = Color::Default;</code></pre>
+
+  <h3>ContentDetector</h3>
+
+  <pre><code>{`use terminal_core::ContentDetector;
+
+let mut detector = ContentDetector::new();
+
+// Detectar tipo de contenido
+let content_type = detector.detect_line("ERROR: Something failed");
+
+match content_type {
+    ContentType::LogError => println!("Es un error"),
+    ContentType::LogWarning => println!("Es un warning"),
+    ContentType::LogInfo => println!("Es info"),
+    ContentType::Json(_) => println!("Es JSON"),
+    ContentType::StackTrace(_) => println!("Es stack trace"),
+    ContentType::Plain => println!("Texto plano"),
+    _ => {}
+}`}</code></pre>
+
+  <h2>terminal-ansi</h2>
+
+  <h3>Parser</h3>
+
+  <pre><code>{`use terminal_ansi::{Parser, Handler};
+
+struct MyHandler {
+    // tu implementación
+}
+
+impl Handler for MyHandler {
+    fn print(&mut self, c: char) {
+        // Manejar carácter imprimible
+    }
+    
+    fn execute(&mut self, byte: u8) {
+        // Manejar caracteres de control
+    }
+    
+    fn csi_dispatch(&mut self, params: &[i64], intermediates: &[u8], ignore: bool, c: char) {
+        // Manejar secuencia CSI
+    }
+    
+    // ... más métodos
+}
+
+let mut parser = Parser::new();
+let mut handler = MyHandler {};
+
+// Procesar bytes
+parser.advance(&mut handler, b"\x1b[31mRed text\x1b[0m");`}</code></pre>
+
+  <h2>terminal-renderer</h2>
+
+  <h3>ModernTheme</h3>
+
+  <pre><code>use terminal_renderer::ModernTheme;
+
+let theme = ModernTheme::default();
+
+// Obtener colores como u32 (ARGB)
+let fg = theme.foreground_u32();
+let bg = theme.background_u32();
+
+// Colores ANSI
+let red = theme.ansi_color(1);
+let bright_red = theme.ansi_color(9);
+
+// Color de sugerencia
+let suggestion = theme.fg_suggestion_u32();</code></pre>
+
+  <h3>CpuRenderer</h3>
+
+  <pre><code>use terminal_renderer::CpuRenderer;
+
+let mut renderer = CpuRenderer::new(width, height, &font_data, font_size);
+
+// Renderizar pantalla a buffer
+let buffer = renderer.render(&screen, &theme);
+
+// Resize
+renderer.resize(new_width, new_height);</code></pre>
+
+  <h2>terminal-pty</h2>
+
+  <h3>Pty</h3>
+
+  <pre><code>use terminal_pty::Pty;
+
+// Crear PTY con shell por defecto
+let mut pty = Pty::new(80, 24)?;
+
+// Escribir al proceso
+pty.write(b"ls -la\n")?;
+
+// Leer output
+let mut buf = [0u8; 1024];
+let n = pty.read(&mut buf)?;
+
+// Resize
+pty.resize(120, 40)?;</code></pre>
+
+  <h2>Documentación Generada</h2>
+
+  <p>Para documentación completa de la API, genera los docs de Rust:</p>
+
+  <pre><code># Generar documentación
+cargo doc --no-deps --all-features
+
+# Abrir en navegador
+cargo doc --no-deps --all-features --open</code></pre>
+
+  <h2>Ejemplos</h2>
+
+  <p>Consulta la carpeta <code>examples/</code> para ejemplos de uso:</p>
+
+  <pre><code># Ejemplo básico
+cargo run --example simple
+
+# Ejemplo de colores
+cargo run --example colored</code></pre>
+</ChronoDocsLayout>

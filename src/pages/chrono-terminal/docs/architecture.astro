@@ -1,0 +1,291 @@
+---
+import ChronoDocsLayout from "../../../layouts/ChronoDocsLayout.astro";
+---
+
+<ChronoDocsLayout
+  title="Arquitectura | CHRONO Terminal"
+  description="Documentación de la arquitectura modular de CHRONO Terminal"
+  activeDoc="architecture"
+>
+  <h1>Arquitectura</h1>
+
+  <p class="text-lg text-chrono-text-muted">
+    CHRONO está construido con una arquitectura modular usando workspace de
+    Cargo con múltiples crates independientes.
+  </p>
+
+  <h2>Estructura del Proyecto</h2>
+
+  <pre><code>CHRONO/
+├── crates/
+│   ├── core/           # Terminal core logic
+│   │   ├── screen.rs      # Screen buffer & grid
+│   │   ├── cell.rs        # Cell attributes
+│   │   ├── cursor.rs      # Cursor state
+│   │   ├── context.rs     # Context detection
+│   │   ├── detector.rs    # Content type detection
+│   │   ├── history.rs     # Command history
+│   │   └── attributes.rs  # Colors & styles
+│   │
+│   ├── ansi/           # ANSI/VT parser
+│   │   ├── handler.rs     # VTE handler
+│   │   └── lib.rs         # Parser wrapper
+│   │
+│   ├── pty/            # PTY interface
+│   │   └── lib.rs         # Shell spawning
+│   │
+│   ├── renderer/       # Rendering engine
+│   │   ├── cpu.rs         # CPU renderer
+│   │   └── theme.rs       # Color themes
+│   │
+│   └── app/            # Main application
+│       ├── main.rs        # Event loop
+│       └── config.rs      # Config management
+│
+├── examples/           # Usage examples
+│   ├── simple.rs          # Basic usage
+│   └── colored.rs         # Color demonstrations
+│
+├── benches/            # Performance benchmarks
+│   └── rendering.rs       # Rendering benchmarks
+│
+└── docs/               # Documentation
+    ├── SMART_RENDERING.md
+    └── SUGGESTIONS.md</code></pre>
+
+  <h2>Crates</h2>
+
+  <h3>terminal-core</h3>
+
+  <p>Lógica central del emulador de terminal.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Módulo</th>
+        <th>Responsabilidad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>screen.rs</code></td>
+        <td>Buffer de pantalla, grid bidimensional, scrollback</td>
+      </tr>
+      <tr>
+        <td><code>cell.rs</code></td>
+        <td>Representación de una celda (carácter + atributos)</td>
+      </tr>
+      <tr>
+        <td><code>cursor.rs</code></td>
+        <td>Estado del cursor (posición, visibilidad, estilo)</td>
+      </tr>
+      <tr>
+        <td><code>context.rs</code></td>
+        <td>Detección de contexto de línea (error, warning, etc.)</td>
+      </tr>
+      <tr>
+        <td><code>detector.rs</code></td>
+        <td>Detección de tipos de contenido (logs, JSON, tablas)</td>
+      </tr>
+      <tr>
+        <td><code>history.rs</code></td>
+        <td>Historial de comandos para sugerencias</td>
+      </tr>
+      <tr>
+        <td><code>attributes.rs</code></td>
+        <td>Colores y estilos de texto</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>terminal-ansi</h3>
+
+  <p>Parser de secuencias de escape ANSI/VT.</p>
+
+  <ul>
+    <li>Implementa handler VTE para procesar secuencias</li>
+    <li>Soporte para CSI, OSC, DCS y secuencias de escape</li>
+    <li>Manejo de colores 8/256/24-bit</li>
+    <li>Atributos de texto (bold, italic, underline, etc.)</li>
+  </ul>
+
+  <h3>terminal-pty</h3>
+
+  <p>Interfaz con pseudo-terminal del sistema.</p>
+
+  <ul>
+    <li>Spawning de shells (bash, zsh, fish)</li>
+    <li>Comunicación I/O con el proceso hijo</li>
+    <li>Resize del PTY</li>
+    <li>Multiplataforma via <code>portable-pty</code></li>
+  </ul>
+
+  <h3>terminal-renderer</h3>
+
+  <p>Motor de renderizado gráfico.</p>
+
+  <ul>
+    <li>Renderizado CPU con <code>fontdue</code></li>
+    <li>Rasterización de glifos</li>
+    <li>Gestión de temas y colores</li>
+    <li>Buffer de píxeles para softbuffer</li>
+  </ul>
+
+  <h3>terminal-app</h3>
+
+  <p>Aplicación principal.</p>
+
+  <ul>
+    <li>Event loop con <code>winit</code></li>
+    <li>Gestión de ventana</li>
+    <li>Manejo de input (teclado, mouse)</li>
+    <li>Carga de configuración</li>
+  </ul>
+
+  <h2>Diagrama de Dependencias</h2>
+
+  <pre><code>                    ┌─────────────┐
+                    │    app      │
+                    └──────┬──────┘
+           ┌───────────────┼───────────────┐
+           ▼               ▼               ▼
+    ┌──────────────┐ ┌──────────┐ ┌───────────────┐
+    │   renderer   │ │   ansi   │ │      pty      │
+    └──────┬───────┘ └────┬─────┘ └───────────────┘
+           │              │
+           ▼              ▼
+    ┌──────────────────────────────┐
+    │            core              │
+    └──────────────────────────────┘</code></pre>
+
+  <h2>Principios de Diseño</h2>
+
+  <h3>1. Separación de Responsabilidades</h3>
+
+  <p>
+    Cada crate tiene una única responsabilidad bien definida. Esto facilita:
+  </p>
+
+  <ul>
+    <li>Testing unitario independiente</li>
+    <li>Reutilización en otros proyectos</li>
+    <li>Mantenimiento a largo plazo</li>
+  </ul>
+
+  <h3>2. Sin Dependencias Circulares</h3>
+
+  <p>
+    El árbol de dependencias es estrictamente acíclico. <code>core</code> no depende
+    de ningún otro crate interno.
+  </p>
+
+  <h3>3. Zero-Copy Donde es Posible</h3>
+
+  <p>Se minimizan las allocations innecesarias:</p>
+
+  <ul>
+    <li>El screen buffer reutiliza celdas</li>
+    <li>El parser ANSI procesa bytes in-place</li>
+    <li>El renderer usa buffers preallocados</li>
+  </ul>
+
+  <h3>4. Safe Rust</h3>
+
+  <p>
+    No hay código <code>unsafe</code> en la lógica core. El código unsafe se limita
+    a:
+  </p>
+
+  <ul>
+    <li>Interacción con APIs de sistema (PTY)</li>
+    <li>Optimizaciones del renderer (si las hay)</li>
+  </ul>
+
+  <h3>5. Testeable</h3>
+
+  <p>Cada módulo incluye tests unitarios:</p>
+
+  <pre><code># Ejecutar todos los tests
+cargo test --all
+
+# Tests de un crate específico
+cargo test -p terminal-core
+
+# Con output verbose
+cargo test -- --nocapture</code></pre>
+
+  <h2>Flujo de Datos</h2>
+
+  <h3>Input (Usuario → Shell)</h3>
+
+  <ol>
+    <li>Usuario presiona tecla</li>
+    <li><code>winit</code> captura evento de teclado</li>
+    <li><code>app</code> convierte a secuencia de escape (si es necesario)</li>
+    <li><code>pty</code> escribe bytes al proceso shell</li>
+  </ol>
+
+  <h3>Output (Shell → Pantalla)</h3>
+
+  <ol>
+    <li>Shell escribe output al PTY</li>
+    <li><code>pty</code> lee bytes</li>
+    <li><code>ansi</code> parsea secuencias de escape</li>
+    <li><code>core</code> actualiza screen buffer</li>
+    <li><code>renderer</code> rasteriza glifos</li>
+    <li><code>softbuffer</code> presenta en pantalla</li>
+  </ol>
+
+  <h2>Testing</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Crate</th>
+        <th>Tests</th>
+        <th>Cobertura</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>terminal-core</td>
+        <td>15 tests</td>
+        <td>Screen, cursor, context, detector</td>
+      </tr>
+      <tr>
+        <td>terminal-ansi</td>
+        <td>10 tests</td>
+        <td>Parser, colores, atributos</td>
+      </tr>
+      <tr>
+        <td>terminal-pty</td>
+        <td>5 tests</td>
+        <td>Spawning, I/O, resize</td>
+      </tr>
+      <tr>
+        <td>terminal-renderer</td>
+        <td>9 tests</td>
+        <td>Theme, rendering</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Benchmarks</h2>
+
+  <pre><code># Ejecutar benchmarks
+cargo bench
+
+# Benchmark específico
+cargo bench --bench rendering</code></pre>
+
+  <h2>Extendiendo CHRONO</h2>
+
+  <p>Para añadir nuevas funcionalidades:</p>
+
+  <ol>
+    <li>Identifica el crate apropiado</li>
+    <li>Añade la funcionalidad con tests</li>
+    <li>Actualiza el handler ANSI si es necesario</li>
+    <li>Integra en app si requiere UI</li>
+  </ol>
+</ChronoDocsLayout>

@@ -1,0 +1,265 @@
+---
+import ChronoDocsLayout from "../../../layouts/ChronoDocsLayout.astro";
+---
+
+<ChronoDocsLayout
+  title="Contribuir | CHRONO Terminal"
+  description="Guía para contribuir al desarrollo de CHRONO Terminal"
+  activeDoc="contributing"
+>
+  <h1>Contribuir a CHRONO</h1>
+
+  <p class="text-lg text-chrono-text-muted">
+    ¡Las contribuciones son bienvenidas! Esta guía te ayudará a comenzar.
+  </p>
+
+  <div class="chrono-alert chrono-alert-info mt-6">
+    <span>ℹ️</span>
+    <div>
+      Este proyecto fue desarrollado con asistencia de AI. Consulta <a
+        href="https://github.com/zeltri/CHRONO/blob/main/AGENTS.md">AGENTS.md</a
+      > para más información sobre la metodología de desarrollo.
+    </div>
+  </div>
+
+  <h2>Cómo Contribuir</h2>
+
+  <h3>1. Fork y Clone</h3>
+
+  <pre><code># Fork en GitHub, luego clone
+git clone https://github.com/TU-USUARIO/CHRONO.git
+cd CHRONO</code></pre>
+
+  <h3>2. Crear Branch</h3>
+
+  <pre><code>git checkout -b feature/mi-feature
+# o
+git checkout -b fix/mi-bugfix</code></pre>
+
+  <h3>3. Desarrollar</h3>
+
+  <ul>
+    <li>Implementa tu feature o fix</li>
+    <li>Añade tests para código nuevo</li>
+    <li>Asegúrate de que todos los tests pasan</li>
+  </ul>
+
+  <h3>4. Formatear y Lint</h3>
+
+  <pre><code># Formatear código
+cargo fmt --all
+
+# Lint con clippy
+cargo clippy --all-targets --all-features -- -D warnings</code></pre>
+
+  <h3>5. Commit y Push</h3>
+
+  <pre><code>git add .
+git commit -m "feat: descripción de mi feature"
+git push origin feature/mi-feature</code></pre>
+
+  <h3>6. Pull Request</h3>
+
+  <p>
+    Abre un Pull Request en GitHub con una descripción clara de los cambios.
+  </p>
+
+  <h2>Convenciones</h2>
+
+  <h3>Commits</h3>
+
+  <p>
+    Usamos <a href="https://www.conventionalcommits.org/"
+      >Conventional Commits</a
+    >:
+  </p>
+
+  <pre><code>feat: añadir nueva funcionalidad
+fix: corregir bug
+docs: actualizar documentación
+style: formateo, sin cambios de código
+refactor: refactorización de código
+test: añadir o modificar tests
+chore: tareas de mantenimiento</code></pre>
+
+  <h3>Código Rust</h3>
+
+  <ul>
+    <li>Seguir <code>cargo fmt</code> para formateo</li>
+    <li>Pasar <code>cargo clippy</code> sin warnings</li>
+    <li>Documentar funciones públicas con <code>///</code></li>
+    <li>Añadir tests para nuevas funcionalidades</li>
+  </ul>
+
+  <h3>Documentación</h3>
+
+  <ul>
+    <li>Actualizar README si añades features de usuario</li>
+    <li>Añadir doc comments para API pública</li>
+    <li>Actualizar docs en <code>/docs</code> si es necesario</li>
+  </ul>
+
+  <h2>Áreas de Contribución</h2>
+
+  <h3>🎨 Temas</h3>
+
+  <p>Añadir nuevos esquemas de color:</p>
+
+  <ul>
+    <li>Crear preset en <code>theme.rs</code></li>
+    <li>Documentar colores hex</li>
+    <li>Añadir ejemplo de configuración</li>
+  </ul>
+
+  <h3>🐛 Bug Fixes</h3>
+
+  <p>Reportar o corregir issues:</p>
+
+  <ul>
+    <li>Buscar issues existentes primero</li>
+    <li>Incluir pasos para reproducir</li>
+    <li>Añadir test de regresión con el fix</li>
+  </ul>
+
+  <h3>📖 Documentación</h3>
+
+  <ul>
+    <li>Mejorar docs existentes</li>
+    <li>Añadir ejemplos de uso</li>
+    <li>Traducir documentación</li>
+  </ul>
+
+  <h3>⚡ Performance</h3>
+
+  <ul>
+    <li>Optimizaciones del renderer</li>
+    <li>Reducir allocations</li>
+    <li>Añadir benchmarks</li>
+  </ul>
+
+  <h3>🧪 Tests</h3>
+
+  <ul>
+    <li>Aumentar cobertura de tests</li>
+    <li>Tests de integración</li>
+    <li>Tests de regresión</li>
+  </ul>
+
+  <h3>🌍 Internacionalización</h3>
+
+  <ul>
+    <li>Soporte para diferentes locales</li>
+    <li>Traducción de mensajes</li>
+  </ul>
+
+  <h2>Desarrollo Local</h2>
+
+  <h3>Setup</h3>
+
+  <pre><code># Instalar Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# Clone y build
+git clone https://github.com/zeltri/CHRONO.git
+cd CHRONO
+cargo build</code></pre>
+
+  <h3>Comandos Útiles</h3>
+
+  <pre><code># Build
+cargo build
+cargo build --release
+
+# Tests
+cargo test --all
+cargo test -p terminal-core
+cargo test -- --nocapture
+
+# Watch mode (requiere cargo-watch)
+cargo watch -x test
+
+# Benchmarks
+cargo bench
+
+# Docs
+cargo doc --no-deps --all-features --open
+
+# Formatear
+cargo fmt --all
+
+# Lint
+cargo clippy --all-targets --all-features</code></pre>
+
+  <h3>Ejecutar Ejemplos</h3>
+
+  <pre><code>cargo run --example simple
+cargo run --example colored</code></pre>
+
+  <h2>Estructura de Tests</h2>
+
+  <p>Los tests se organizan por módulo:</p>
+
+  <pre><code>crates/
+├── core/src/
+│   ├── screen.rs      # Tests inline con #[cfg(test)]
+│   ├── tests.rs       # Tests adicionales
+│   └── ...
+├── ansi/src/
+│   ├── handler.rs
+│   └── tests.rs
+└── ...</code></pre>
+
+  <h3>Escribir Tests</h3>
+
+  <pre><code set:html={`#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_feature() {
+        let screen = Screen::new(80, 24);
+        assert_eq!(screen.cols(), 80);
+        assert_eq!(screen.rows(), 24);
+    }
+
+    #[test]
+    fn test_edge_case() {
+        // Test para caso límite
+    }
+}`} /></pre>
+
+  <h2>Code Review</h2>
+
+  <p>Los PRs serán revisados considerando:</p>
+
+  <ul>
+    <li>✅ Código compila sin warnings</li>
+    <li>✅ Tests pasan</li>
+    <li>✅ Clippy sin warnings</li>
+    <li>✅ Documentación actualizada</li>
+    <li>✅ Commits descriptivos</li>
+    <li>✅ Sin regresiones de performance</li>
+  </ul>
+
+  <h2>Contacto</h2>
+
+  <ul>
+    <li>
+      <strong>Issues:</strong>
+      <a href="https://github.com/zeltri/CHRONO/issues">GitHub Issues</a>
+    </li>
+    <li>
+      <strong>Discussions:</strong>
+      <a href="https://github.com/zeltri/CHRONO/discussions"
+        >GitHub Discussions</a
+      >
+    </li>
+  </ul>
+
+  <h2>Licencia</h2>
+
+  <p>
+    Al contribuir, aceptas que tu código se publique bajo la licencia MIT del
+    proyecto.
+  </p>
+</ChronoDocsLayout>

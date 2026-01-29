@@ -1,0 +1,198 @@
+---
+import ChronoDocsLayout from "../../../layouts/ChronoDocsLayout.astro";
+---
+
+<ChronoDocsLayout
+  title="Instalación | CHRONO Terminal"
+  description="Guía de instalación completa de CHRONO Terminal"
+  activeDoc="installation"
+>
+  <h1>Instalación</h1>
+
+  <p class="text-lg text-chrono-text-muted">
+    CHRONO se compila desde el código fuente usando Cargo, el gestor de paquetes
+    de Rust.
+  </p>
+
+  <h2>Requisitos del Sistema</h2>
+
+  <h3>Software Requerido</h3>
+
+  <ul>
+    <li>
+      <strong>Rust 1.70+</strong> — El compilador de Rust y Cargo
+      <br />
+      <a href="https://rustup.rs/">Instalar desde rustup.rs</a>
+    </li>
+  </ul>
+
+  <h3>Sistemas Operativos Soportados</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Sistema</th>
+        <th>Estado</th>
+        <th>Notas</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Linux</td>
+        <td>✅ Completo</td>
+        <td>Probado en Ubuntu, Arch, Fedora</td>
+      </tr>
+      <tr>
+        <td>macOS</td>
+        <td>✅ Completo</td>
+        <td>macOS 10.15+</td>
+      </tr>
+      <tr>
+        <td>Windows</td>
+        <td>🧪 Experimental</td>
+        <td>Requiere WSL o ConPTY</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Fuente Recomendada</h3>
+
+  <p>
+    Para la mejor experiencia, instala la fuente <strong>Cascadia Code</strong>:
+  </p>
+
+  <ul>
+    <li>
+      <a href="https://github.com/microsoft/cascadia-code/releases"
+        >Descargar desde GitHub</a
+      >
+    </li>
+    <li>Soporta ligaduras de programación</li>
+    <li>Incluida por defecto en Windows Terminal</li>
+  </ul>
+
+  <h2>Instalación desde Código Fuente</h2>
+
+  <h3>Paso 1: Clonar el Repositorio</h3>
+
+  <pre><code>git clone https://github.com/zeltri/CHRONO.git
+cd CHRONO</code></pre>
+
+  <h3>Paso 2: Compilar en Modo Release</h3>
+
+  <pre><code># Compilación optimizada (recomendado)
+cargo build --release
+
+# El binario estará en:
+# ./target/release/terminal</code></pre>
+
+  <div class="chrono-alert chrono-alert-info">
+    <span>💡</span>
+    <div>
+      La primera compilación puede tomar unos minutos mientras se descargan y
+      compilan las dependencias.
+    </div>
+  </div>
+
+  <h3>Paso 3: Ejecutar</h3>
+
+  <pre><code># Ejecutar directamente
+./target/release/terminal
+
+# O con cargo (modo desarrollo)
+cargo run</code></pre>
+
+  <h2>Instalación Global</h2>
+
+  <p>Para acceder a CHRONO desde cualquier ubicación:</p>
+
+  <h3>Opción A: Usando cargo install</h3>
+
+  <pre><code># Instala en ~/.cargo/bin
+cargo install --path crates/app
+
+# Ahora puedes ejecutar desde cualquier lugar
+terminal</code></pre>
+
+  <h3>Opción B: Copiar manualmente</h3>
+
+  <pre><code># Copiar a un directorio en PATH
+sudo cp target/release/terminal /usr/local/bin/
+
+# Verificar instalación
+terminal --version</code></pre>
+
+  <h2>Verificar Instalación</h2>
+
+  <p>Después de instalar, verifica que todo funciona correctamente:</p>
+
+  <pre><code># Verificar versión
+terminal --version
+
+# Debería mostrar algo como:
+# CHRONO Terminal v1.0.0</code></pre>
+
+  <h2>Actualización</h2>
+
+  <p>Para actualizar a la última versión:</p>
+
+  <pre><code>cd CHRONO
+git pull origin main
+cargo build --release</code></pre>
+
+  <h2>Desinstalación</h2>
+
+  <p>Para desinstalar CHRONO:</p>
+
+  <pre><code># Si usaste cargo install
+cargo uninstall terminal-app
+
+# Si copiaste manualmente
+sudo rm /usr/local/bin/terminal
+
+# Eliminar archivos de configuración (opcional)
+rm -rf ~/.config/terminal-emulator</code></pre>
+
+  <h2>Solución de Problemas</h2>
+
+  <h3>Error: "Rust no encontrado"</h3>
+
+  <p>Asegúrate de que Rust está instalado correctamente:</p>
+
+  <pre><code>rustc --version
+cargo --version</code></pre>
+
+  <p>Si no están instalados, usa rustup:</p>
+
+  <pre><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code></pre>
+
+  <h3>Error: Dependencias de sistema faltantes</h3>
+
+  <p>En Linux, puede que necesites instalar dependencias adicionales:</p>
+
+  <pre><code># Ubuntu/Debian
+sudo apt install build-essential libfontconfig1-dev
+
+# Fedora
+sudo dnf install fontconfig-devel
+
+# Arch
+sudo pacman -S fontconfig</code></pre>
+
+  <h3>Error: Fuente no encontrada</h3>
+
+  <p>Si CHRONO no encuentra la fuente Cascadia Code:</p>
+
+  <ol>
+    <li>Descarga la fuente desde el enlace anterior</li>
+    <li>Instálala en tu sistema</li>
+    <li>O configura otra fuente en <code>config.toml</code></li>
+  </ol>
+
+  <h2>Próximos Pasos</h2>
+
+  <ul>
+    <li><a href="/chrono-terminal/docs/configuration">Configurar CHRONO</a></li>
+    <li><a href="/chrono-terminal/docs">Volver a la documentación</a></li>
+  </ul>
+</ChronoDocsLayout>

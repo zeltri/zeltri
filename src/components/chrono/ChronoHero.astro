@@ -1,0 +1,145 @@
+---
+// ChronoHero.astro - Hero section with terminal preview
+---
+
+<section class="pt-24 md:pt-32 pb-16 md:pb-24 relative overflow-hidden">
+  <!-- Background gradient -->
+  <div
+    class="absolute inset-0 bg-gradient-to-b from-chrono-bg-darker to-chrono-bg opacity-50"
+  >
+  </div>
+
+  <!-- Subtle grid pattern -->
+  <div
+    class="absolute inset-0 opacity-5"
+    style="background-image: linear-gradient(var(--color-chrono-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-chrono-border) 1px, transparent 1px); background-size: 50px 50px;"
+  >
+  </div>
+
+  <div class="chrono-container relative z-10">
+    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      <!-- Left Content -->
+      <div class="flex-1 max-w-xl">
+        <!-- Badges -->
+        <div class="flex flex-wrap gap-2 mb-6">
+          <span class="chrono-badge chrono-badge-green">v1.0</span>
+          <span class="chrono-badge chrono-badge-yellow">Rust</span>
+          <span class="chrono-badge chrono-badge-blue">MIT License</span>
+        </div>
+
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 text-chrono-text-light"
+        >
+          Terminal moderno,<br />
+          <span class="chrono-text-gradient">escrito en Rust</span>
+        </h1>
+
+        <p class="text-lg md:text-xl mb-8 leading-relaxed text-chrono-text">
+          CHRONO es un emulador de terminal de alto rendimiento con soporte
+          completo para ANSI, detección inteligente de contenido y el elegante
+          tema <strong class="text-chrono-primary">OneDark Pro</strong>.
+        </p>
+
+        <div class="flex flex-wrap gap-4 mb-8">
+          <a href="#installation" class="chrono-btn chrono-btn-primary">
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              ></path>
+            </svg>
+            Instalar CHRONO
+          </a>
+          <a href="/chrono-terminal/docs" class="chrono-btn chrono-btn-outline">
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              ></path>
+            </svg>
+            Documentación
+          </a>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="flex items-center gap-6 text-sm text-chrono-text-muted">
+          <div class="flex items-center gap-2">
+            <span class="text-chrono-orange">🦀</span>
+            <span>Rust 1.70+</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span>⚡</span>
+            <span>Alto rendimiento</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span>🎨</span>
+            <span>OneDark Pro</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Content - Terminal Preview -->
+      <div class="flex-1 w-full max-w-xl lg:max-w-2xl">
+        <div class="chrono-terminal chrono-glow">
+          <div class="chrono-terminal-header">
+            <div class="chrono-terminal-dot chrono-terminal-dot-red"></div>
+            <div class="chrono-terminal-dot chrono-terminal-dot-yellow"></div>
+            <div class="chrono-terminal-dot chrono-terminal-dot-green"></div>
+            <span class="chrono-terminal-title">chrono — ~/projects</span>
+          </div>
+          <div class="chrono-terminal-body">
+            <div class="mb-2">
+              <span class="chrono-terminal-prompt">❯ </span>
+              <span class="chrono-terminal-command">cargo build --release</span>
+            </div>
+            <div class="chrono-terminal-info mb-1">
+              Compiling terminal-core v0.1.0
+            </div>
+            <div class="chrono-terminal-info mb-1">
+              Compiling terminal-ansi v0.1.0
+            </div>
+            <div class="chrono-terminal-info mb-1">
+              Compiling terminal-renderer v0.1.0
+            </div>
+            <div class="chrono-terminal-success mb-3">
+              Finished release [optimized] target(s) in 4.32s
+            </div>
+
+            <div class="mb-2">
+              <span class="chrono-terminal-prompt">❯ </span>
+              <span class="chrono-terminal-command"
+                >./target/release/terminal</span
+              >
+            </div>
+            <div class="text-chrono-magenta mb-1">
+              🚀 CHRONO Terminal v1.0.0
+            </div>
+            <div class="text-chrono-text-muted mb-1">Theme: OneDark Pro</div>
+            <div class="text-chrono-text-muted mb-3">
+              Font: Cascadia Code 14px
+            </div>
+
+            <div>
+              <span class="chrono-terminal-prompt">❯ </span>
+              <span class="chrono-cursor"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

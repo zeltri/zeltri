@@ -1,0 +1,163 @@
+---
+// ChronoArchitecture.astro - Architecture overview section
+---
+
+<section id="architecture" class="chrono-section">
+  <div class="chrono-container">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <span class="chrono-badge chrono-badge-magenta mb-4">Arquitectura</span>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-chrono-text-light">
+        Diseño Modular
+      </h2>
+      <p class="text-lg max-w-2xl mx-auto text-chrono-text-muted">
+        CHRONO está construido con crates independientes para máxima
+        testabilidad y mantenibilidad.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8 items-start">
+      <!-- Crates List -->
+      <div class="space-y-4">
+        <div class="chrono-card">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="chrono-badge chrono-badge-blue">core</span>
+            <h4 class="font-semibold text-chrono-text-light">terminal-core</h4>
+          </div>
+          <p class="text-sm text-chrono-text-muted mb-3">
+            Lógica central del terminal: screen buffer, grid, cursor, atributos
+            y detección de contexto.
+          </p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <code class="chrono-inline-code">screen.rs</code>
+            <code class="chrono-inline-code">cell.rs</code>
+            <code class="chrono-inline-code">cursor.rs</code>
+            <code class="chrono-inline-code">context.rs</code>
+            <code class="chrono-inline-code">detector.rs</code>
+          </div>
+        </div>
+
+        <div class="chrono-card">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="chrono-badge chrono-badge-green">ansi</span>
+            <h4 class="font-semibold text-chrono-text-light">terminal-ansi</h4>
+          </div>
+          <p class="text-sm text-chrono-text-muted mb-3">
+            Parser ANSI/VT completo con soporte para secuencias CSI, SGR y
+            control.
+          </p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <code class="chrono-inline-code">handler.rs</code>
+            <code class="chrono-inline-code">lib.rs</code>
+          </div>
+        </div>
+
+        <div class="chrono-card">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="chrono-badge chrono-badge-yellow">pty</span>
+            <h4 class="font-semibold text-chrono-text-light">terminal-pty</h4>
+          </div>
+          <p class="text-sm text-chrono-text-muted mb-3">
+            Interfaz PTY para spawning de shells y comunicación I/O.
+          </p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <code class="chrono-inline-code">lib.rs</code>
+          </div>
+        </div>
+
+        <div class="chrono-card">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="chrono-badge chrono-badge-cyan">renderer</span>
+            <h4 class="font-semibold text-chrono-text-light">
+              terminal-renderer
+            </h4>
+          </div>
+          <p class="text-sm text-chrono-text-muted mb-3">
+            Motor de renderizado CPU con fontdue y gestión de temas.
+          </p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <code class="chrono-inline-code">cpu.rs</code>
+            <code class="chrono-inline-code">theme.rs</code>
+          </div>
+        </div>
+
+        <div class="chrono-card">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="chrono-badge chrono-badge-red">app</span>
+            <h4 class="font-semibold text-chrono-text-light">terminal-app</h4>
+          </div>
+          <p class="text-sm text-chrono-text-muted mb-3">
+            Aplicación principal: event loop, windowing y configuración.
+          </p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <code class="chrono-inline-code">main.rs</code>
+            <code class="chrono-inline-code">config.rs</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dependency Graph -->
+      <div class="chrono-card bg-chrono-bg-darker">
+        <h4 class="font-semibold text-chrono-text-light mb-6">
+          Dependencias entre módulos
+        </h4>
+        <div class="chrono-code-block text-center">
+          <pre
+            class="text-sm leading-loose">
+<span class="text-chrono-red">app</span>
+ ├─ <span class="text-chrono-cyan">renderer</span> → <span class="text-chrono-blue">core</span>
+ ├─ <span class="text-chrono-green">ansi</span> → <span class="text-chrono-blue">core</span>
+ ├─ <span class="text-chrono-yellow">pty</span>
+ └─ <span class="text-chrono-blue">core</span>
+          </pre>
+        </div>
+
+        <div class="mt-6 pt-6 border-t border-chrono-border">
+          <h5 class="font-semibold text-chrono-text-light mb-4">
+            Principios de diseño
+          </h5>
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-chrono-green mt-0.5">✓</span>
+              <span class="text-chrono-text-muted"
+                ><strong class="text-chrono-text"
+                  >Separación de responsabilidades</strong
+                > — Cada crate tiene un único propósito</span
+              >
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-chrono-green mt-0.5">✓</span>
+              <span class="text-chrono-text-muted"
+                ><strong class="text-chrono-text"
+                  >Sin dependencias circulares</strong
+                > — Árbol de dependencias limpio</span
+              >
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-chrono-green mt-0.5">✓</span>
+              <span class="text-chrono-text-muted"
+                ><strong class="text-chrono-text"
+                  >Zero-copy cuando es posible</strong
+                > — Minimiza allocations</span
+              >
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-chrono-green mt-0.5">✓</span>
+              <span class="text-chrono-text-muted"
+                ><strong class="text-chrono-text">Safe Rust</strong> — Sin código
+                unsafe en lógica core</span
+              >
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-chrono-green mt-0.5">✓</span>
+              <span class="text-chrono-text-muted"
+                ><strong class="text-chrono-text">Testeable</strong> — Unit tests
+                para cada módulo</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

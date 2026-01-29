@@ -1,0 +1,142 @@
+---
+// ChronoInstall.astro - Installation section
+---
+
+<section id="installation" class="chrono-section">
+  <div class="chrono-container">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <span class="chrono-badge chrono-badge-green mb-4">Instalación</span>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-chrono-text-light">
+        Comienza en minutos
+      </h2>
+      <p class="text-lg max-w-2xl mx-auto text-chrono-text-muted">
+        CHRONO se compila desde el código fuente con Cargo. Solo necesitas Rust
+        1.70+ instalado.
+      </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto">
+      <!-- Prerequisites -->
+      <div class="chrono-card mb-6">
+        <h3 class="text-lg font-semibold mb-4 text-chrono-text-light">
+          Requisitos
+        </h3>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3">
+            <span class="text-chrono-green mt-0.5">✓</span>
+            <div>
+              <strong class="text-chrono-text-light">Rust 1.70+</strong>
+              <span class="text-chrono-text-muted"> — </span>
+              <a
+                href="https://rustup.rs/"
+                target="_blank"
+                rel="noopener"
+                class="text-chrono-primary hover:text-chrono-cyan"
+                >Install Rust</a
+              >
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-chrono-green mt-0.5">✓</span>
+            <div>
+              <strong class="text-chrono-text-light">Linux o macOS</strong>
+              <span class="text-chrono-text-muted">
+                — Windows experimental</span
+              >
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-chrono-green mt-0.5">✓</span>
+            <div>
+              <strong class="text-chrono-text-light">Cascadia Code Font</strong>
+              <span class="text-chrono-text-muted"> — </span>
+              <a
+                href="https://github.com/microsoft/cascadia-code/releases"
+                target="_blank"
+                rel="noopener"
+                class="text-chrono-primary hover:text-chrono-cyan">Download</a
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Installation Steps -->
+      <div class="space-y-4">
+        <!-- Step 1 -->
+        <div class="chrono-card chrono-card-accent">
+          <div class="flex items-center gap-3 mb-3">
+            <span
+              class="w-8 h-8 rounded-full bg-chrono-primary text-chrono-bg-dark flex items-center justify-center font-bold text-sm"
+              >1</span
+            >
+            <h4 class="font-semibold text-chrono-text-light">
+              Clonar repositorio
+            </h4>
+          </div>
+          <div class="chrono-code-block">
+            <code class="text-chrono-text"
+              >git clone https://github.com/zeltri/CHRONO.git</code
+            ><br />
+            <code class="text-chrono-text">cd CHRONO</code>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="chrono-card chrono-card-accent">
+          <div class="flex items-center gap-3 mb-3">
+            <span
+              class="w-8 h-8 rounded-full bg-chrono-primary text-chrono-bg-dark flex items-center justify-center font-bold text-sm"
+              >2</span
+            >
+            <h4 class="font-semibold text-chrono-text-light">
+              Compilar en modo release
+            </h4>
+          </div>
+          <div class="chrono-code-block">
+            <code class="text-chrono-text">cargo build --release</code>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="chrono-card chrono-card-accent">
+          <div class="flex items-center gap-3 mb-3">
+            <span
+              class="w-8 h-8 rounded-full bg-chrono-primary text-chrono-bg-dark flex items-center justify-center font-bold text-sm"
+              >3</span
+            >
+            <h4 class="font-semibold text-chrono-text-light">Ejecutar</h4>
+          </div>
+          <div class="chrono-code-block">
+            <code class="text-chrono-text">./target/release/terminal</code>
+          </div>
+        </div>
+
+        <!-- Optional: System-wide install -->
+        <div
+          class="chrono-card bg-chrono-bg-lighter border-chrono-border-light"
+        >
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-chrono-cyan">💡</span>
+            <h4 class="font-semibold text-chrono-text-light">
+              Instalación global (opcional)
+            </h4>
+          </div>
+          <div class="chrono-code-block">
+            <code class="text-chrono-text-muted"
+              ># Instalar en ~/.cargo/bin</code
+            ><br />
+            <code class="text-chrono-text">cargo install --path crates/app</code
+            ><br /><br />
+            <code class="text-chrono-text-muted"># O copiar el binario</code><br
+            />
+            <code class="text-chrono-text"
+              >sudo cp target/release/terminal /usr/local/bin/</code
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,136 @@
+---
+// ChronoDocsLayout.astro - Layout for documentation pages with sidebar
+import ChronoLayout from "./ChronoLayout.astro";
+import ChronoNavbar from "../components/chrono/ChronoNavbar.astro";
+import ChronoFooter from "../components/chrono/ChronoFooter.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  activeDoc?: string;
+}
+
+const {
+  title = "Documentación | CHRONO Terminal",
+  description = "Documentación completa del emulador de terminal CHRONO",
+  activeDoc = "overview",
+} = Astro.props;
+
+const docsNav = [
+  {
+    section: "Empezando",
+    items: [
+      {
+        id: "overview",
+        name: "Descripción General",
+        href: "/chrono-terminal/docs",
+      },
+      {
+        id: "installation",
+        name: "Instalación",
+        href: "/chrono-terminal/docs/installation",
+      },
+      {
+        id: "configuration",
+        name: "Configuración",
+        href: "/chrono-terminal/docs/configuration",
+      },
+    ],
+  },
+  {
+    section: "Características",
+    items: [
+      {
+        id: "smart-rendering",
+        name: "Smart Rendering",
+        href: "/chrono-terminal/docs/smart-rendering",
+      },
+      {
+        id: "suggestions",
+        name: "Sugerencias",
+        href: "/chrono-terminal/docs/suggestions",
+      },
+      {
+        id: "ansi-support",
+        name: "Soporte ANSI",
+        href: "/chrono-terminal/docs/ansi-support",
+      },
+    ],
+  },
+  {
+    section: "Avanzado",
+    items: [
+      {
+        id: "architecture",
+        name: "Arquitectura",
+        href: "/chrono-terminal/docs/architecture",
+      },
+      { id: "api", name: "API Reference", href: "/chrono-terminal/docs/api" },
+      {
+        id: "contributing",
+        name: "Contribuir",
+        href: "/chrono-terminal/docs/contributing",
+      },
+    ],
+  },
+];
+---
+
+<ChronoLayout title={title} description={description}>
+  <ChronoNavbar />
+
+  <div class="pt-20 min-h-screen">
+    <div class="chrono-container py-8">
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Sidebar -->
+        <aside class="lg:w-64 flex-shrink-0">
+          <nav class="chrono-docs-sidebar">
+            {
+              docsNav.map((section) => (
+                <div class="mb-6">
+                  <h3 class="chrono-docs-nav-section">{section.section}</h3>
+                  <ul class="space-y-1">
+                    {section.items.map((item) => (
+                      <li>
+                        <a
+                          href={item.href}
+                          class={`chrono-docs-nav-item ${activeDoc === item.id ? "active" : ""}`}
+                        >
+                          {item.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            }
+          </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 min-w-0">
+          <article class="chrono-prose max-w-none">
+            <slot />
+          </article>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <ChronoFooter />
+</ChronoLayout>
+
+<style>
+  aside {
+    position: relative;
+  }
+
+  @media (min-width: 1024px) {
+    aside {
+      position: sticky;
+      top: 5rem;
+      max-height: calc(100vh - 6rem);
+      overflow-y: auto;
+    }
+  }
+</style>

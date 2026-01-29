@@ -1,0 +1,365 @@
+---
+import ChronoDocsLayout from "../../../layouts/ChronoDocsLayout.astro";
+
+// Define code blocks with escape sequences as raw strings
+const codeBasicColors = `# Primer plano
+\\033[30m Negro
+\\033[31m Rojo
+\\033[32m Verde
+\\033[33m Amarillo
+\\033[34m Azul
+\\033[35m Magenta
+\\033[36m Cyan
+\\033[37m Blanco
+
+# Fondo
+\\033[40m - \\033[47m`;
+
+const codeBrightColors = `\\033[90m Negro brillante
+\\033[91m Rojo brillante
+...
+\\033[97m Blanco brillante`;
+
+const code256Colors = `# Primer plano: ESC[38;5;{n}m
+\\033[38;5;196m  # Rojo intenso
+
+# Fondo: ESC[48;5;{n}m
+\\033[48;5;21m   # Azul`;
+
+const codeTrueColor = `# Primer plano: ESC[38;2;{r};{g};{b}m
+\\033[38;2;255;100;50m  # RGB personalizado
+
+# Fondo: ESC[48;2;{r};{g};{b}m
+\\033[48;2;30;30;30m`;
+
+const codeCombineAttrs = `# Bold + Rojo
+\\033[1;31m Texto bold rojo \\033[0m
+
+# Underline + Italic + Azul
+\\033[4;3;34m Texto subrayado italic azul \\033[0m`;
+
+const codeCursorSave = `\\033[s    # Guardar posición del cursor
+\\033[u    # Restaurar posición del cursor
+
+\\0337     # Guardar cursor y atributos (DEC)
+\\0338     # Restaurar cursor y atributos (DEC)`;
+
+const codeScroll = `\\033[{n}S   # Scroll up n líneas
+\\033[{n}T   # Scroll down n líneas`;
+
+const codeSuggestion = `\\033[53m   # Activar modo sugerencia (texto gris)
+\\033[54m   # Desactivar modo sugerencia`;
+
+const codeExample = `#!/bin/bash
+# Demo de capacidades ANSI de CHRONO
+
+# Colores y estilos
+echo -e "\\033[1;31mBold Rojo\\033[0m"
+echo -e "\\033[3;32mItalic Verde\\033[0m"
+echo -e "\\033[4;34mUnderline Azul\\033[0m"
+echo -e "\\033[1;4;35mBold + Underline Magenta\\033[0m"
+
+# True color gradient
+for i in {0..255}; do
+    printf "\\033[38;2;$i;$((255-i));128m█"
+done
+echo -e "\\033[0m"
+
+# 256 colores
+for i in {0..255}; do
+    printf "\\033[48;5;\${i}m  "
+    if [ $(((i+1) % 16)) -eq 0 ]; then echo -e "\\033[0m"; fi
+done`;
+---
+
+<ChronoDocsLayout
+  title="Soporte ANSI | CHRONO Terminal"
+  description="Documentación del soporte completo ANSI/VT de CHRONO Terminal"
+  activeDoc="ansi-support"
+>
+  <h1>Soporte ANSI Completo</h1>
+
+  <p class="text-lg text-chrono-text-muted">
+    CHRONO implementa un parser ANSI/VT completo con soporte para todas las
+    secuencias de escape estándar.
+  </p>
+
+  <h2>Colores</h2>
+
+  <h3>Colores Básicos (8 colores)</h3>
+
+  <p>Códigos 30-37 para primer plano, 40-47 para fondo:</p>
+
+  <pre><code>{codeBasicColors}</code></pre>
+
+  <h3>Colores Brillantes (8 colores)</h3>
+
+  <p>Códigos 90-97 para primer plano brillante, 100-107 para fondo:</p>
+
+  <pre><code>{codeBrightColors}</code></pre>
+
+  <h3>Colores 256 (8-bit)</h3>
+
+  <p>Usando el formato extendido:</p>
+
+  <pre><code>{code256Colors}</code></pre>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Rango</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>0-7</td>
+        <td>Colores estándar</td>
+      </tr>
+      <tr>
+        <td>8-15</td>
+        <td>Colores brillantes</td>
+      </tr>
+      <tr>
+        <td>16-231</td>
+        <td>Cubo de color 6x6x6</td>
+      </tr>
+      <tr>
+        <td>232-255</td>
+        <td>Escala de grises</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>True Color (24-bit RGB)</h3>
+
+  <pre><code>{codeTrueColor}</code></pre>
+
+  <h2>Atributos de Texto</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Atributo</th>
+        <th>Desactivar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>\033[0m</code></td>
+        <td>Reset (todos los atributos)</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><code>\033[1m</code></td>
+        <td>Bold / Intenso</td>
+        <td><code>\033[22m</code></td>
+      </tr>
+      <tr>
+        <td><code>\033[2m</code></td>
+        <td>Dim / Tenue</td>
+        <td><code>\033[22m</code></td>
+      </tr>
+      <tr>
+        <td><code>\033[3m</code></td>
+        <td>Italic</td>
+        <td><code>\033[23m</code></td>
+      </tr>
+      <tr>
+        <td><code>\033[4m</code></td>
+        <td>Underline</td>
+        <td><code>\033[24m</code></td>
+      </tr>
+      <tr>
+        <td><code>\033[5m</code></td>
+        <td>Blink (lento)</td>
+        <td><code>\033[25m</code></td>
+      </tr>
+      <tr>
+        <td><code>\033[7m</code></td>
+        <td>Inverse / Reverso</td>
+        <td><code>\033[27m</code></td>
+      </tr>
+      <tr>
+        <td><code>\033[8m</code></td>
+        <td>Hidden / Invisible</td>
+        <td><code>\033[28m</code></td>
+      </tr>
+      <tr>
+        <td><code>\033[9m</code></td>
+        <td>Strikethrough</td>
+        <td><code>\033[29m</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Combinando Atributos</h3>
+
+  <pre><code>{codeCombineAttrs}</code></pre>
+
+  <h2>Control del Cursor</h2>
+
+  <h3>Movimiento</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Secuencia</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>{"\\033[{n}A"}</code></td>
+        <td>Mover cursor arriba n líneas</td>
+      </tr>
+      <tr>
+        <td><code>{"\\033[{n}B"}</code></td>
+        <td>Mover cursor abajo n líneas</td>
+      </tr>
+      <tr>
+        <td><code>{"\\033[{n}C"}</code></td>
+        <td>Mover cursor derecha n columnas</td>
+      </tr>
+      <tr>
+        <td><code>{"\\033[{n}D"}</code></td>
+        <td>Mover cursor izquierda n columnas</td>
+      </tr>
+      <tr>
+        <td><code>{"\\033[{row};{col}H"}</code></td>
+        <td>Mover cursor a posición (1-indexed)</td>
+      </tr>
+      <tr>
+        <td><code>{"\\033[{row};{col}f"}</code></td>
+        <td>Mover cursor a posición (alternativo)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Guardado y Restauración</h3>
+
+  <pre><code>{codeCursorSave}</code></pre>
+
+  <h2>Borrado</h2>
+
+  <h3>Borrar en Línea</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Secuencia</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>\033[K</code> o <code>\033[0K</code></td>
+        <td>Borrar desde cursor hasta fin de línea</td>
+      </tr>
+      <tr>
+        <td><code>\033[1K</code></td>
+        <td>Borrar desde inicio de línea hasta cursor</td>
+      </tr>
+      <tr>
+        <td><code>\033[2K</code></td>
+        <td>Borrar línea completa</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Borrar en Pantalla</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Secuencia</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>\033[J</code> o <code>\033[0J</code></td>
+        <td>Borrar desde cursor hasta fin de pantalla</td>
+      </tr>
+      <tr>
+        <td><code>\033[1J</code></td>
+        <td>Borrar desde inicio hasta cursor</td>
+      </tr>
+      <tr>
+        <td><code>\033[2J</code></td>
+        <td>Borrar pantalla completa</td>
+      </tr>
+      <tr>
+        <td><code>\033[3J</code></td>
+        <td>Borrar pantalla y scrollback</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Scroll</h2>
+
+  <pre><code>{codeScroll}</code></pre>
+
+  <h2>Modos de Terminal</h2>
+
+  <h3>Modos DEC Privados</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Secuencia</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>\033[?25h</code></td>
+        <td>Mostrar cursor</td>
+      </tr>
+      <tr>
+        <td><code>\033[?25l</code></td>
+        <td>Ocultar cursor</td>
+      </tr>
+      <tr>
+        <td><code>\033[?1049h</code></td>
+        <td>Activar alternate screen buffer</td>
+      </tr>
+      <tr>
+        <td><code>\033[?1049l</code></td>
+        <td>Desactivar alternate screen buffer</td>
+      </tr>
+      <tr>
+        <td><code>\033[?2004h</code></td>
+        <td>Activar bracketed paste mode</td>
+      </tr>
+      <tr>
+        <td><code>\033[?2004l</code></td>
+        <td>Desactivar bracketed paste mode</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Secuencias Personalizadas</h2>
+
+  <p>CHRONO añade soporte para secuencias personalizadas:</p>
+
+  <h3>Modo Sugerencia</h3>
+
+  <pre><code>{codeSuggestion}</code></pre>
+
+  <h2>Unicode</h2>
+
+  <p>CHRONO soporta Unicode completo incluyendo:</p>
+
+  <ul>
+    <li>Caracteres CJK (chino, japonés, coreano) con ancho doble</li>
+    <li>Emojis 🚀 🎨 ✅</li>
+    <li>Caracteres de dibujo de cajas ─│┌┐└┘</li>
+    <li>Símbolos matemáticos y especiales</li>
+  </ul>
+
+  <h2>Ejemplo Completo</h2>
+
+  <pre><code>{codeExample}</code></pre>
+</ChronoDocsLayout>

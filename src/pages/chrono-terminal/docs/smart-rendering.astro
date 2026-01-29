@@ -1,0 +1,292 @@
+---
+import ChronoDocsLayout from "../../../layouts/ChronoDocsLayout.astro";
+---
+
+<ChronoDocsLayout
+  title="Smart Rendering | CHRONO Terminal"
+  description="Sistema de detección y renderizado inteligente de CHRONO Terminal"
+  activeDoc="smart-rendering"
+>
+  <h1>Sistema de Renderizado Inteligente</h1>
+
+  <p class="text-lg text-chrono-text-muted">
+    CHRONO incluye un sistema avanzado que detecta automáticamente diferentes
+    tipos de contenido y los colorea apropiadamente.
+  </p>
+
+  <h2>🎯 Características</h2>
+
+  <p>El sistema detecta y colorea automáticamente:</p>
+
+  <ul>
+    <li>
+      🎨 <strong>Logs estructurados</strong> — INFO, WARN, ERROR, DEBUG, TRACE, FATAL
+    </li>
+    <li>❌ <strong>Mensajes de error</strong> y excepciones</li>
+    <li>⚠️ <strong>Advertencias</strong> y cautiones</li>
+    <li>✅ <strong>Mensajes de éxito</strong></li>
+    <li>📊 <strong>JSON</strong> con sintaxis coloreada</li>
+    <li>📋 <strong>Tablas ASCII</strong> con formato mejorado</li>
+    <li>
+      🔍 <strong>Stack traces</strong> multi-lenguaje (Rust, Python, Java, JavaScript,
+      etc.)
+    </li>
+  </ul>
+
+  <h2>📋 Detección de Logs</h2>
+
+  <p>El sistema detecta automáticamente niveles de log comunes:</p>
+
+  <pre><code>INFO: Server started on port 8080     # Azul
+WARN: Deprecated function used        # Amarillo
+ERROR: Connection failed              # Rojo
+DEBUG: Variable value = 42            # Cyan
+TRACE: Entering function              # Gris
+FATAL: System crash detected          # Rojo intenso</code></pre>
+
+  <h3>Patrones detectados</h3>
+
+  <ul>
+    <li><code>INFO</code>, <code>[INF]</code>, <code>ℹ</code></li>
+    <li><code>WARN</code>, <code>WARNING</code>, <code>[WRN]</code></li>
+    <li><code>ERROR</code>, <code>[ERR]</code>, <code>✗</code></li>
+    <li><code>DEBUG</code>, <code>[DBG]</code></li>
+    <li><code>TRACE</code>, <code>[TRC]</code></li>
+    <li><code>FATAL</code>, <code>CRITICAL</code></li>
+  </ul>
+
+  <h2>📊 JSON Coloreado</h2>
+
+  <p>El sintaxis highlight se aplica automáticamente a JSON:</p>
+
+  <pre><code>{`{
+  "name": "John",      // Keys en azul, strings en verde
+  "age": 30,           // Números en naranja
+  "active": true,      // Booleanos en magenta
+  "role": null         // null en cyan
+}`}</code></pre>
+
+  <h3>Colores aplicados</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Elemento</th>
+        <th>Color</th>
+        <th>Hex</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Llaves/Brackets <code>{`{}[]`}</code></td>
+        <td>Gris secundario</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>Keys</td>
+        <td>Azul</td>
+        <td><code>#61afef</code></td>
+      </tr>
+      <tr>
+        <td>Strings</td>
+        <td>Verde</td>
+        <td><code>#98c379</code></td>
+      </tr>
+      <tr>
+        <td>Números</td>
+        <td>Naranja</td>
+        <td><code>#d19a66</code></td>
+      </tr>
+      <tr>
+        <td>Booleanos</td>
+        <td>Magenta</td>
+        <td><code>#c678dd</code></td>
+      </tr>
+      <tr>
+        <td>null</td>
+        <td>Cyan</td>
+        <td><code>#56b6c2</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>🔍 Stack Traces Inteligentes</h2>
+
+  <p>
+    CHRONO detecta stack traces de múltiples lenguajes y los resalta en cyan:
+  </p>
+
+  <h3>Rust</h3>
+  <pre><code>at src/main.rs:42:5
+   --> src/handler.rs:15:10</code></pre>
+
+  <h3>Python</h3>
+  <pre><code>  File "script.py", line 42, in main</code></pre>
+
+  <h3>Java</h3>
+  <pre><code>at com.example.Main.method(Main.java:42)</code></pre>
+
+  <h3>JavaScript/Node.js</h3>
+  <pre><code>at Object.&lt;anonymous&gt; (app.js:10:5)</code></pre>
+
+  <div class="chrono-alert chrono-alert-info">
+    <span>💡</span>
+    <div>
+      <strong>Tip:</strong> Haz click en las referencias de archivo para abrirlas
+      directamente en tu editor.
+    </div>
+  </div>
+
+  <h2>📋 Detección de Tablas</h2>
+
+  <p>Reconoce y formatea tablas ASCII comunes:</p>
+
+  <pre><code>+--------+--------+--------+
+| Header | Header | Header |  # Encabezado en cyan
++--------+--------+--------+
+| Data   | Data   | Data   |  # Datos con formato
++--------+--------+--------+</code></pre>
+
+  <h3>Separadores reconocidos</h3>
+
+  <ul>
+    <li><code>+---+---+</code></li>
+    <li><code>|---|---|</code></li>
+    <li><code>=========</code></li>
+    <li>Caracteres Unicode: <code>─</code>, <code>━</code>, <code>═</code></li>
+  </ul>
+
+  <h2>✅ Mensajes de Éxito</h2>
+
+  <p>Identifica indicadores de éxito y los colorea en verde:</p>
+
+  <pre><code>✓ Tests passed
+✔ Build successful
+✅ All checks completed
+success: Operation completed</code></pre>
+
+  <h2>⚙️ Configuración</h2>
+
+  <p>El sistema es completamente configurable vía <code>config.toml</code>:</p>
+
+  <pre><code>[rendering]
+# Habilita detección inteligente de contenido
+smart_detection = true
+
+# Habilita sintaxis coloreada para JSON
+json_colors = true
+
+# Habilita colores automáticos para logs
+log_colors = true
+
+# Habilita detección y formateo de tablas ASCII
+table_detection = true</code></pre>
+
+  <h3>Configuración por defecto</h3>
+
+  <p>
+    Por defecto, <strong>todas las características están habilitadas</strong>.
+    Esto proporciona la mejor experiencia en modo interactivo.
+  </p>
+
+  <h3>Desactivar para Scripts</h3>
+
+  <p>
+    Si estás usando la terminal en scripts o pipelines donde quieres output
+    plano:
+  </p>
+
+  <pre><code>[rendering]
+smart_detection = false</code></pre>
+
+  <p>O usa variables de entorno:</p>
+
+  <pre><code>NO_COLOR=1 ./tu-script.sh</code></pre>
+
+  <h2>🎨 Paleta de Colores</h2>
+
+  <p>El sistema usa la paleta <strong>OneDark Pro</strong>:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Tipo</th>
+        <th>Color</th>
+        <th>Hex</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Log INFO</td>
+        <td>Azul</td>
+        <td><code>#61afef</code></td>
+      </tr>
+      <tr>
+        <td>Log WARN</td>
+        <td>Amarillo</td>
+        <td><code>#e5c07b</code></td>
+      </tr>
+      <tr>
+        <td>Log ERROR</td>
+        <td>Rojo</td>
+        <td><code>#e06c75</code></td>
+      </tr>
+      <tr>
+        <td>Log DEBUG</td>
+        <td>Cyan</td>
+        <td><code>#56b6c2</code></td>
+      </tr>
+      <tr>
+        <td>Éxito</td>
+        <td>Verde</td>
+        <td><code>#98c379</code></td>
+      </tr>
+      <tr>
+        <td>JSON Keys</td>
+        <td>Azul</td>
+        <td><code>#61afef</code></td>
+      </tr>
+      <tr>
+        <td>JSON Strings</td>
+        <td>Verde</td>
+        <td><code>#98c379</code></td>
+      </tr>
+      <tr>
+        <td>JSON Numbers</td>
+        <td>Naranja</td>
+        <td><code>#d19a66</code></td>
+      </tr>
+      <tr>
+        <td>JSON Booleans</td>
+        <td>Magenta</td>
+        <td><code>#c678dd</code></td>
+      </tr>
+      <tr>
+        <td>Stack Traces</td>
+        <td>Cyan</td>
+        <td><code>#56b6c2</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>🔧 Arquitectura</h2>
+
+  <p>
+    El módulo de detección se encuentra en <code
+      >crates/core/src/detector.rs</code>
+  </p>
+
+  <h3>Componentes principales</h3>
+
+  <ul>
+    <li>
+      <strong>ContentDetector</strong> — Detector stateful con soporte para multi-línea
+    </li>
+    <li>
+      <strong>ContentType</strong> — Enum que representa tipos de contenido detectados
+    </li>
+    <li><strong>LogLevel</strong> — Niveles de log soportados</li>
+    <li><strong>JsonFragment</strong> — Información sobre tokens JSON</li>
+    <li><strong>TableInfo</strong> — Metadata de tablas detectadas</li>
+  </ul>
+</ChronoDocsLayout>

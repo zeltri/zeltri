@@ -1,0 +1,147 @@
+---
+// ChronoSmartRendering.astro - Smart rendering showcase section
+---
+
+<section id="smart-rendering" class="chrono-section bg-chrono-bg-darker">
+  <div class="chrono-container">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <span class="chrono-badge chrono-badge-cyan mb-4">Smart Rendering</span>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-chrono-text-light">
+        Renderizado Inteligente
+      </h2>
+      <p class="text-lg max-w-2xl mx-auto text-chrono-text-muted">
+        CHRONO detecta automáticamente el tipo de contenido y aplica colores
+        semánticos para mejor legibilidad.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8">
+      <!-- Log Levels -->
+      <div class="chrono-card">
+        <h3
+          class="text-lg font-semibold mb-4 text-chrono-text-light flex items-center gap-2"
+        >
+          <span>📋</span> Logs Estructurados
+        </h3>
+        <div class="chrono-code-block">
+          <div class="mb-1">
+            <span class="text-chrono-blue">INFO:</span>
+            <span class="text-chrono-text">Server started on port 8080</span>
+          </div>
+          <div class="mb-1">
+            <span class="text-chrono-yellow">WARN:</span>
+            <span class="text-chrono-text">Deprecated function used</span>
+          </div>
+          <div class="mb-1">
+            <span class="text-chrono-red">ERROR:</span>
+            <span class="text-chrono-text">Connection failed</span>
+          </div>
+          <div class="mb-1">
+            <span class="text-chrono-cyan">DEBUG:</span>
+            <span class="text-chrono-text">Variable value = 42</span>
+          </div>
+          <div>
+            <span class="text-chrono-text-muted">TRACE:</span>
+            <span class="text-chrono-text">Entering function</span>
+          </div>
+        </div>
+        <p class="mt-4 text-sm text-chrono-text-muted">
+          Detecta patrones como INFO, WARN, ERROR, DEBUG y TRACE con colores
+          apropiados.
+        </p>
+      </div>
+
+      <!-- JSON Coloring -->
+      <div class="chrono-card">
+        <h3
+          class="text-lg font-semibold mb-4 text-chrono-text-light flex items-center gap-2"
+        >
+          <span>📊</span> JSON Coloreado
+        </h3>
+        <div class="chrono-code-block">
+          <div class="text-chrono-text-muted">
+            {}
+            <div class="pl-4">
+              <span class="text-chrono-blue">"name"</span><span
+                class="text-chrono-text-muted">:</span
+              >
+              <span class="text-chrono-green">"CHRONO"</span><span
+                class="text-chrono-text-muted">,</span>
+            </div>
+            <div class="pl-4">
+              <span class="text-chrono-blue">"version"</span><span
+                class="text-chrono-text-muted">:</span
+              >
+              <span class="text-chrono-orange">1.0</span><span
+                class="text-chrono-text-muted">,</span>
+            </div>
+            <div class="pl-4">
+              <span class="text-chrono-blue">"active"</span><span
+                class="text-chrono-text-muted">:</span
+              >
+              <span class="text-chrono-magenta">true</span><span
+                class="text-chrono-text-muted">,</span>
+            </div>
+            <div class="pl-4">
+              <span class="text-chrono-blue">"deprecated"</span><span
+                class="text-chrono-text-muted">:</span
+              >
+              <span class="text-chrono-cyan">null</span>
+            </div>
+            <div class="text-chrono-text-muted"></div>
+          </div>
+        </div>
+        <p class="mt-4 text-sm text-chrono-text-muted">
+          Keys en azul, strings en verde, números en naranja, booleanos en
+          magenta.
+        </p>
+      </div>
+
+      <!-- Stack Traces -->
+      <div class="chrono-card">
+        <h3
+          class="text-lg font-semibold mb-4 text-chrono-text-light flex items-center gap-2"
+        >
+          <span>🔍</span> Stack Traces Multi-lenguaje
+        </h3>
+        <div class="chrono-code-block">
+          <div class="text-chrono-text-muted mb-2"># Rust</div>
+          <div class="text-chrono-cyan mb-3">at src/main.rs:42:5</div>
+          <div class="text-chrono-text-muted mb-2"># Python</div>
+          <div class="text-chrono-cyan mb-3">
+            File "script.py", line 42, in main
+          </div>
+          <div class="text-chrono-text-muted mb-2"># JavaScript</div>
+          <div class="text-chrono-cyan">
+            at Object.&lt;anonymous&gt; (app.js:10:5)
+          </div>
+        </div>
+        <p class="mt-4 text-sm text-chrono-text-muted">
+          Detecta referencias a archivos con línea y columna. Click para abrir
+          en tu editor.
+        </p>
+      </div>
+
+      <!-- Success/Error Messages -->
+      <div class="chrono-card">
+        <h3
+          class="text-lg font-semibold mb-4 text-chrono-text-light flex items-center gap-2"
+        >
+          <span>✨</span> Mensajes Contextuales
+        </h3>
+        <div class="chrono-code-block">
+          <div class="text-chrono-green mb-2">✓ Tests passed (24/24)</div>
+          <div class="text-chrono-green mb-2">✔ Build successful</div>
+          <div class="text-chrono-green mb-4">✅ All checks completed</div>
+          <div class="text-chrono-red mb-2">✗ Error: Connection timeout</div>
+          <div class="text-chrono-red">Exception: NullPointerException</div>
+        </div>
+        <p class="mt-4 text-sm text-chrono-text-muted">
+          Éxito en verde, errores en rojo. Detección automática sin
+          configuración.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

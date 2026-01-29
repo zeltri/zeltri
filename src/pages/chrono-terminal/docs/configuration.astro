@@ -1,0 +1,331 @@
+---
+import ChronoDocsLayout from "../../../layouts/ChronoDocsLayout.astro";
+---
+
+<ChronoDocsLayout
+  title="Configuración | CHRONO Terminal"
+  description="Guía de configuración y personalización de CHRONO Terminal"
+  activeDoc="configuration"
+>
+  <h1>Configuración</h1>
+
+  <p class="text-lg text-chrono-text-muted">
+    CHRONO se configura mediante un archivo TOML ubicado en <code
+      >~/.config/terminal-emulator/config.toml</code
+    >
+  </p>
+
+  <h2>Archivo de Configuración</h2>
+
+  <p>
+    Si el archivo no existe, CHRONO usa valores por defecto. Puedes crear el
+    archivo manualmente o copiar el ejemplo:
+  </p>
+
+  <pre><code>mkdir -p ~/.config/terminal-emulator
+cp config.example.toml ~/.config/terminal-emulator/config.toml</code></pre>
+
+  <h2>Configuración Completa</h2>
+
+  <p>Ejemplo de archivo de configuración con todas las opciones:</p>
+
+  <pre><code># ~/.config/terminal-emulator/config.toml
+
+[font]
+# Familia de fuente (debe estar instalada en el sistema)
+family = "Cascadia Code"
+
+# Tamaño de fuente en puntos
+size = 14
+
+[colors]
+# Colores de primer plano y fondo (RGB)
+# OneDark Pro theme por defecto
+foreground = [171, 178, 191]  # #abb2bf
+background = [40, 44, 52]      # #282c34
+
+[colors.ansi]
+# Colores ANSI estándar (0-7)
+black = [40, 44, 52]       # #282c34
+red = [224, 108, 117]      # #e06c75
+green = [152, 195, 121]    # #98c379
+yellow = [229, 192, 123]   # #e5c07b
+blue = [97, 175, 239]      # #61afef
+magenta = [198, 120, 221]  # #c678dd
+cyan = [86, 182, 194]      # #56b6c2
+white = [171, 178, 191]    # #abb2bf
+
+# Colores brillantes ANSI (8-15)
+bright_black = [92, 99, 112]    # #5c6370
+bright_red = [224, 108, 117]    # #e06c75
+bright_green = [152, 195, 121]  # #98c379
+bright_yellow = [229, 192, 123] # #e5c07b
+bright_blue = [97, 175, 239]    # #61afef
+bright_magenta = [198, 120, 221]# #c678dd
+bright_cyan = [86, 182, 194]    # #56b6c2
+bright_white = [255, 255, 255]  # #ffffff
+
+[terminal]
+# Dimensiones iniciales de la terminal
+rows = 24
+cols = 80
+
+# Líneas de historial (scrollback buffer)
+scrollback = 10000
+
+[shell]
+# Shell a usar (auto-detecta si no se especifica)
+program = "/bin/zsh"
+
+# Argumentos adicionales para el shell
+# args = ["-l"]  # Login shell
+
+[rendering]
+# Habilita detección inteligente de contenido
+smart_detection = true
+
+# Habilita sintaxis coloreada para JSON
+json_colors = true
+
+# Habilita colores automáticos para logs
+log_colors = true
+
+# Habilita detección y formateo de tablas ASCII
+table_detection = true
+
+[cursor]
+# Estilo del cursor: "block", "underline", "bar"
+style = "block"
+
+# Cursor parpadeante
+blink = true
+
+# Intervalo de parpadeo en milisegundos
+blink_interval = 500</code></pre>
+
+  <h2>Secciones de Configuración</h2>
+
+  <h3>[font] - Tipografía</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Opción</th>
+        <th>Tipo</th>
+        <th>Default</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>family</code></td>
+        <td>String</td>
+        <td>"Cascadia Code"</td>
+        <td>Nombre de la familia de fuente</td>
+      </tr>
+      <tr>
+        <td><code>size</code></td>
+        <td>Number</td>
+        <td>14</td>
+        <td>Tamaño en puntos</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>[colors] - Colores Principales</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Opción</th>
+        <th>Tipo</th>
+        <th>Default</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>foreground</code></td>
+        <td>[R, G, B]</td>
+        <td>[171, 178, 191]</td>
+        <td>Color de texto principal</td>
+      </tr>
+      <tr>
+        <td><code>background</code></td>
+        <td>[R, G, B]</td>
+        <td>[40, 44, 52]</td>
+        <td>Color de fondo</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>[colors.ansi] - Paleta ANSI</h3>
+
+  <p>
+    Override de los 16 colores ANSI estándar. Cada color se especifica como
+    array RGB <code>[R, G, B]</code>.
+  </p>
+
+  <h3>[terminal] - Terminal</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Opción</th>
+        <th>Tipo</th>
+        <th>Default</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>rows</code></td>
+        <td>Number</td>
+        <td>24</td>
+        <td>Filas iniciales</td>
+      </tr>
+      <tr>
+        <td><code>cols</code></td>
+        <td>Number</td>
+        <td>80</td>
+        <td>Columnas iniciales</td>
+      </tr>
+      <tr>
+        <td><code>scrollback</code></td>
+        <td>Number</td>
+        <td>10000</td>
+        <td>Líneas de historial</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>[shell] - Shell</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Opción</th>
+        <th>Tipo</th>
+        <th>Default</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>program</code></td>
+        <td>String</td>
+        <td>(auto)</td>
+        <td>Ruta al ejecutable del shell</td>
+      </tr>
+      <tr>
+        <td><code>args</code></td>
+        <td>[String]</td>
+        <td>[]</td>
+        <td>Argumentos para el shell</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>[rendering] - Renderizado</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Opción</th>
+        <th>Tipo</th>
+        <th>Default</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>smart_detection</code></td>
+        <td>Boolean</td>
+        <td>true</td>
+        <td>Detección inteligente de contenido</td>
+      </tr>
+      <tr>
+        <td><code>json_colors</code></td>
+        <td>Boolean</td>
+        <td>true</td>
+        <td>Sintaxis coloreada para JSON</td>
+      </tr>
+      <tr>
+        <td><code>log_colors</code></td>
+        <td>Boolean</td>
+        <td>true</td>
+        <td>Colores para logs</td>
+      </tr>
+      <tr>
+        <td><code>table_detection</code></td>
+        <td>Boolean</td>
+        <td>true</td>
+        <td>Detección de tablas ASCII</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Temas Personalizados</h2>
+
+  <p>Puedes crear tu propio tema modificando los colores:</p>
+
+  <h3>Dracula Theme</h3>
+
+  <pre><code>[colors]
+foreground = [248, 248, 242]  # #f8f8f2
+background = [40, 42, 54]      # #282a36
+
+[colors.ansi]
+black = [40, 42, 54]
+red = [255, 85, 85]
+green = [80, 250, 123]
+yellow = [241, 250, 140]
+blue = [189, 147, 249]
+magenta = [255, 121, 198]
+cyan = [139, 233, 253]
+white = [248, 248, 242]</code></pre>
+
+  <h3>Nord Theme</h3>
+
+  <pre><code>[colors]
+foreground = [216, 222, 233]  # #d8dee9
+background = [46, 52, 64]      # #2e3440
+
+[colors.ansi]
+black = [59, 66, 82]
+red = [191, 97, 106]
+green = [163, 190, 140]
+yellow = [235, 203, 139]
+blue = [129, 161, 193]
+magenta = [180, 142, 173]
+cyan = [136, 192, 208]
+white = [229, 233, 240]</code></pre>
+
+  <h2>Variables de Entorno</h2>
+
+  <p>Algunas opciones pueden sobrescribirse con variables de entorno:</p>
+
+  <pre><code># Desactivar colores inteligentes
+NO_COLOR=1 terminal
+
+# Forzar shell específico
+SHELL=/bin/bash terminal
+
+# Directorio de configuración alternativo
+CHRONO_CONFIG_DIR=/path/to/config terminal</code></pre>
+
+  <h2>Recargar Configuración</h2>
+
+  <p>
+    Los cambios en el archivo de configuración requieren reiniciar la terminal
+    para aplicarse.
+  </p>
+
+  <div class="chrono-alert chrono-alert-warning">
+    <span>⚠️</span>
+    <div>
+      <strong>Nota:</strong> Si hay errores de sintaxis en el archivo de configuración,
+      CHRONO usará los valores por defecto.
+    </div>
+  </div>
+</ChronoDocsLayout>
